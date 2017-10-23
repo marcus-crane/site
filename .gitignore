@@ -3,3 +3,5 @@ bin
 include
 lib
 pip-selfcheck.json
+*.sqlite3
+__pycache__
