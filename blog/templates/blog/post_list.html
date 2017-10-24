@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <ul class="list p10">
+        {% for post in posts %}
+            <li class="pa3 pa4-ns bb b--black-10">
+                <b class="db f4 mb1">
+                    <a href="{{ post.slug }}">{{ post.title }}</a>
+                </b>
+        	    <span class="f5 db lh-copy measure">Published: {{ post.published_date }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
