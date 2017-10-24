@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <article class="pa4 measure center">
+        <h1>{{ post.title }}</h1>
+        {% if post.draft %}
+            </h2>Status: This is a draft post</h2>
+        {% else %}
+            <h2>Written on {{ post.published_date|date:"N m, Y" }}</h2>
+        {% endif %}
+        {% autoescape off %}
+            <p>{{ post.text|linebreaksbr|escape }}</p>
+        {% endautoescape %}
+    </article>
+{% endblock %}
