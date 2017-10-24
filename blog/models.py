@@ -14,10 +14,18 @@ class Post(models.Model):
             'Draft post?',
             default=True)
 
-    # When saving, automatically generate the slug from the title
     def save(self, *args, **kwargs):
+        '''
+        When saving, automatically generate the slug from the title
+        '''
         self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
+
+    def pull_excerpt(self):
+        '''
+        Pull the first paragraph of a post to use in the post list
+        '''
+        return self.text.split('\n')[0]
 
     def publish(self):
         self.draft = False

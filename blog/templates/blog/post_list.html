@@ -8,6 +8,7 @@
                     <a href="{{ post.slug }}">{{ post.title }}</a>
                 </b>
         	    <span class="f5 db lh-copy measure">Written on {{ post.date|date:"N m, Y" }}</span>
+                {{ post.pull_excerpt }}
             </li>
         {% endfor %}
     </ul>
