@@ -13,10 +13,25 @@ nav a.b {
     font-size: 1.2em;
 }
 
+/* Sticky footer */
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+section { flex: 1; }
+
 /* Post Detail */
+
+#title {
+  margin-bottom: 0.2em;
+}
 
 .meta p {
     font-style: italic;
+    margin: 0;
 }
 
 /* Pygments */

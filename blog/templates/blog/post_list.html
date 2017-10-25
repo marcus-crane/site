@@ -3,7 +3,7 @@
 {% block content %}
     <ul class="list p10">
         {% for post in posts %}
-            <li class="pa3 pa4-ns">
+            <li class="pa3">
                 <b class="db f4 mb1">
                     <a href="{% url 'blog:post_detail' post.slug %}">{{ post.title }}</a>
                 </b>

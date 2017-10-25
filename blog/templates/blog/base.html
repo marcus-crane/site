@@ -1,24 +1,19 @@
 {% load static %}
 <html>
     <head>
-        <title>UTF-9000</title>
+        <title>{% block title %}utf9k{% endblock %}</title>
         <link href="{% static 'blog/tachyons.min.css' %}" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=NTR" type="text/css" rel="stylesheet" />
         <link href="{% static 'blog/tippy.css' %}" type="text/css" rel="stylesheet" />
         <link href="{% static 'blog/style.css' %}" type="text/css" rel="stylesheet" />
     </head>
     <body>
-        <nav class="pa3">
-            <a class="link dim b f6 f5-ns dib mr3" href="{% url 'blog:post_list' %}" title="Home">UTF 9000</a>
-            <a class="link dim f6 f5-ns dib mr3" href="#" title="About">About</a>
-            <a class="link dim f6 f5-ns dib" href="#" title="Contact">Contact</a>
-        </nav>
-        <section class="pa3 pa5-ns bt b--black-10 black-70">
+        {% include "blog/nav.html" %}
+        <section class="pa3 bt b--black-10 black-70">
             {% block content %}
             {% endblock %}
         </section>
-        {% block footer %}
-        {% endblock %}
+        {% include "blog/footer.html" %}
         <script src="{% static 'blog/tippy.min.js' %}"></script>
         <script>tippy('.tip', { arrow: true, interactive: true, theme: 'light' })</script>
     </body>
