@@ -14,7 +14,7 @@
     </header>
     <section>
       {% autoescape off %}
-        <p>{{ post.render|linebreaks|escape }}</p>
+        {{ post.render }}
       {% endautoescape %}
     </section>
   </article>
