@@ -12,5 +12,5 @@ class PostView(generic.ListView):
     return Post.objects.filter(date__lte=timezone.now()).order_by('-date')[:3]
 
 class PostDetailView(generic.DetailView):
-    model = Post
-    template_name = 'blog/post_detail.html'
+  model = Post
+  template_name = 'blog/post_detail.html'

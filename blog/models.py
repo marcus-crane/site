@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
+from markdown2 import markdown
 
 class Post(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
@@ -15,19 +16,28 @@ class Post(models.Model):
             default=True)
 
     def save(self, *args, **kwargs):
-        '''
+        """
         When saving, automatically generate the slug from the title
-        '''
+        """
         self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
 
+    def render(self):
+        """
+        Render post markdown to HTML with code highlighting support.
+        """
+        return markdown(self.text, extras=['fenced-code-blocks'])
+
     def pull_excerpt(self):
-        '''
+        """
         Pull the first paragraph of a post to use in the post list
-        '''
+        """
         return self.text.split('\n')[0]
 
     def publish(self):
+        """
+        Publish a post which sets a date making it publically visible
+        """
         self.draft = False
         self.date = timezone.now()
         self.save()
