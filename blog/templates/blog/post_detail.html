@@ -1,21 +1,21 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <article class="measure center">
-        <header>
-            <h1 class="b" id="title">{{ post.title }}</h1>
-            <div class="meta">
-                {% if post.draft %}
-                <p id="status">Status: This is a draft post</p>
-                {% else %}
-                <p id="published_date">Written on {{ post.date|date:"N m, Y" }}</p>
-                {% endif %}
-            </div>
-        </header>
-        <section>
-            {% autoescape off %}
-                <p>{{ post.text|linebreaksbr|escape }}</p>
-            {% endautoescape %}
-        </section>
-    </article>
+  <article class="measure center">
+    <header>
+      <h1 class="b" id="title">{{ post.title }}</h1>
+      <div class="meta">
+        {% if post.draft %}
+        <p id="status">Status: This is a draft post</p>
+        {% else %}
+        <p id="published_date">Written on {{ post.date|date:"N m, Y" }}</p>
+        {% endif %}
+      </div>
+    </header>
+    <section>
+      {% autoescape off %}
+        <p>{{ post.text|linebreaksbr|escape }}</p>
+      {% endautoescape %}
+    </section>
+  </article>
 {% endblock %}
