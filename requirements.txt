@@ -1,0 +1,7 @@
+Django==2.0b1
+Markdown==2.6.9
+markdown2==2.3.4
+olefile==0.44
+Pillow==4.3.0
+Pygments==2.2.0
+pytz==2017.2
