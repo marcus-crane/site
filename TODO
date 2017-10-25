@@ -1,0 +1,3 @@
+* Draft posts should not have, or render at, a slug
+* Comb through settings to see if any unneeded features are enabled
+* Write a README

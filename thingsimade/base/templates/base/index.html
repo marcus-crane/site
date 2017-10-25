@@ -1,0 +1,37 @@
+{% load static %}
+
+<!-- This site will be replaced pretty soon but it'll do as a placeholder -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>It"s all hidden away!</title>
+    <style>
+      .flex-container {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-content: center;
+          align-items: center;
+      }
+
+      a {
+          text-decoration: none;
+      }
+    </style>
+</head>
+<body>
+    <div class="flex-container">
+        <img src="{% static 'base/nano.png' %}" height="464px" width="602px" alt="A screenshot of Nano running on my old AWS server">
+        <p>
+           <!-- These seemingly nonsense characters are the HTML entities for emoji! -->
+           <a href="mailto:marcus@thingsima.de">&#x1F4E5; Email</a>
+           <br />
+           <a href="tel:+64-21-08154500">&#x1F4DE; Mobile</a>
+           <br />
+           <a href="https://twitter.com/sentreh" target="_blank">&#x1F4E1; Twitter</a>
+        </p>
+    </div>
+</body>
+</html>
