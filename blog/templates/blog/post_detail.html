@@ -7,8 +7,8 @@
     <header>
       <h1 class="b" id="title">{{ post.title }}</h1>
       <div class="meta">
-        {% if post.draft %}
-        <p id="status">Status: This is a draft post</p>
+        {% if not post.published %}
+        <p id="status">Status: {{ post.get_status_display }}</p>
         {% else %}
         <p id="published_date">Written on {{ post.date|date:"N m, Y" }}</p>
         {% endif %}

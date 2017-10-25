@@ -4,6 +4,11 @@ from django.utils.text import slugify
 from markdown2 import markdown
 
 class Post(models.Model):
+    POST_STATUS = (
+        ('D', 'Draft'),
+        ('U', 'Unlisted'),
+        ('P', 'Published'),
+    )
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=40, blank=True)
@@ -11,9 +16,8 @@ class Post(models.Model):
     date = models.DateTimeField(
             'Publication date',
             blank=True, null=True)
-    draft = models.BooleanField(
-            'Draft post?',
-            default=True)
+    status = models.CharField(max_length=1,
+        choices=POST_STATUS)
 
     def save(self, *args, **kwargs):
         """
@@ -38,7 +42,7 @@ class Post(models.Model):
         """
         Publish a post which sets a date making it publically visible
         """
-        self.draft = False
+        self.status = 'P'
         self.date = timezone.now()
         self.save()
 
