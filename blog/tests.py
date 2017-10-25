@@ -61,6 +61,24 @@ class PostIndexViewTests(TestCase):
     self.assertEqual(article.status_code, 200)
     self.assertContains(article, public_post.text)
 
+  def test_publish_draft_post(self):
+    """
+    If a post is created that is a draft, calling the publish method should render it
+    visible and change the draft field to false
+    """
+    draft_post = create_post(author=self.user, title='Draft Post', text='This will be published', days=None, draft=True)
+    blog = self.client.get(reverse('blog:post_list'))
+    self.assertQuerysetEqual(blog.context['posts'], [])
+    self.assertEqual(draft_post.date, None)
+    self.assertEqual(draft_post.draft, True)
+    
+    draft_post.publish() # Post should now have a current date and draft set to False
+
+    blog = self.client.get(reverse('blog:post_list'))
+    self.assertNotEqual(draft_post.date, None)
+    self.assertEqual(draft_post.draft, False)
+    self.assertQuerysetEqual(blog.context['posts'], ['<Post: Draft Post>'])
+
   def test_published_post_with_future_date(self):
     """
     If a post is not a draft but has a date in the future, it shouldn't appear in the post list
