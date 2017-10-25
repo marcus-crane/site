@@ -60,3 +60,13 @@ class PostIndexViewTests(TestCase):
     article = self.client.get(reverse('blog:post_detail', kwargs={'slug': public_post.slug}))
     self.assertEqual(article.status_code, 200)
     self.assertContains(article, public_post.text)
+
+  def test_published_post_with_future_date(self):
+    """
+    If a post is not a draft but has a date in the future, it shouldn't appear in the post list
+    """
+    public_post = create_post(author=self.user, title='Future Post', text='Hello from the future!', days=2, draft=False)
+    blog = self.client.get(reverse('blog:post_list'))
+    self.assertEqual(blog.status_code, 200)
+    self.assertContains(blog, 'No posts have been written yet!')
+    self.assertQuerysetEqual(blog.context['posts'], [])
