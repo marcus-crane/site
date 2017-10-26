@@ -24,7 +24,7 @@ SECRET_KEY = 'hijbiq(=rk$(#x9@0%w#)0od86i^3m765ut#m+@1a3aw5d=ofv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['thingsima.de']
 
 # Application definition
 
@@ -118,6 +118,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
-STATIC_URL = '/static' # Development
-# STATIC_URL = 'http://static.thingsima.de' # Production
+STATIC_URL = '/static/' # Development
+# STATIC_URL = 'http://static.thingsima.de/' # Production
 
