@@ -13,6 +13,12 @@ nav a.b {
     font-size: 1.2em;
 }
 
+/* Home */
+
+p.home {
+  margin: 18px 0;
+}
+
 /* Sticky footer */
 
 body {

@@ -10,7 +10,14 @@
         <link href="{% static 'blog/style.css' %}" type="text/css" rel="stylesheet" />
     </head>
     <body>
-        {% include "blog/nav.html" %}
+        <nav class="pa3">
+            <a class="link hover-hot-pink b f6 f5-ns dib mr3" href="{% block navlink %}{% url 'blog:post_list' %}{% endblock %}" title="Home">{% block nav %}utf9k{% endblock %}</a>
+            <a class="link hover-red f6 f5-ns dib mr3" href="/" title="root">home</a>
+            <a class="link hover-red f6 f5-ns dib mr3" href="/projects" title="About">projects</a>
+            <a class="link hover-red f6 f5-ns dib mr3" href="/blog" title="About">blog</a>
+            <a class="link hover-red f6 f5-ns dib mr3" href="/about" title="About">reviews</a>
+            <a class="link hover-red f6 f5-ns dib" href="/contact" title="Contact">contact</a>
+        </nav>
         <section class="pa3 bt b--black-10 black-70">
             {% block content %}
             {% endblock %}
