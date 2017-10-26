@@ -118,6 +118,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
-#STATIC_URL = '/static'
-STATIC_URL = 'http://static.thingsima.de'
+STATIC_URL = '/static' # Development
+# STATIC_URL = 'http://static.thingsima.de' # Production
 
