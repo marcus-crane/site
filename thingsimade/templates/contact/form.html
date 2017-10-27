@@ -2,6 +2,9 @@
 
 {% block title %}Contact | utf9k{% endblock %}
 
+{% block nav %}cyber phonebooth{% endblock %}
+{% block navlink %}/contact{% endblock %}
+
 {% block content %}
 <form class="pa4 black-80" method="POST" action="http://localhost:8000/contact/">
   {% csrf_token %}
