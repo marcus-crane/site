@@ -3,21 +3,19 @@
 {% block title %}utf9k{% endblock %}
 
 {% block content %}
-    <ul class="list p10">
-        {% if posts %}
-            {% for post in posts %}
-                <li class="pa3">
-                    <b class="db f4 mb1">
-                        <a href="{% url 'blog:post_detail' post.slug %}">{{ post.title }}</a>
-                    </b>
-            	    <span class="f5 db lh-copy measure">Written on {{ post.date|date:"N m, Y" }}</span>
-                    {{ post.pull_excerpt }}
-                </li>
-            {% endfor %}
-        {% else %}
-            <li class="pa3">
-                <b class="db f4 mb1">No posts have been written yet!</b>
-            </li>
-        {% endif %}
-    </ul>
+  <ul class="list p10">
+    {% for post in posts %}
+      <li class="pa3">
+        <b class="db f4 mb1">
+          <a href="{% url 'blog:post_detail' post.slug %}">{{ post.title }}</a>
+        </b>
+        <span class="f5 db lh-copy measure">Written on {{ post.date|date:"N m, Y" }}</span>
+        {{ post.pull_excerpt }}
+      </li>
+    {% empty %}
+      <li class="pa3">
+        <b class="db f4 mb1">No posts have been written yet!</b>
+      </li>
+    {% endfor %}
+  </ul>
 {% endblock %}
