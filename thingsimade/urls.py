@@ -20,4 +20,5 @@ urlpatterns = [
     path('', include('thingsimade.base.urls')),
     path('admin/', admin.site.urls),
     path('blog/', include('thingsimade.blog.urls')),
+    path('contact/', include('thingsimade.contact.urls')),
 ]

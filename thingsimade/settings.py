@@ -24,7 +24,7 @@ SECRET_KEY = 'hijbiq(=rk$(#x9@0%w#)0od86i^3m765ut#m+@1a3aw5d=ofv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['thingsima.de']
+ALLOWED_HOSTS = []
 
 # Application definition
 
