@@ -27,7 +27,7 @@ body {
   flex-direction: column;
 }
 
-section { flex: 1; }
+article #pager { flex: 1; }
 
 /* Post Detail */
 
