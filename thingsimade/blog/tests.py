@@ -30,7 +30,7 @@ class PostIndexViewTests(TestCase):
     """
     If no posts exist, display an appropriate message
     """
-    blog = self.client.get(reverse('blog:post_list'))
+    blog = self.client.get(reverse('blog:list'))
     self.assertEqual(blog.status_code, 200)
     self.assertContains(blog, 'No posts have been written yet!')
     self.assertQuerysetEqual(blog.context['posts'], [])
@@ -40,11 +40,11 @@ class PostIndexViewTests(TestCase):
     If a post is a draft, it shouldn't appear in the post list and the slug should be a 404
     """
     draft_post = create_post(author=self.user, title='Draft Post', text='This is a draft post', days=None, status='D')
-    blog = self.client.get(reverse('blog:post_list'))
+    blog = self.client.get(reverse('blog:list'))
     self.assertEqual(blog.status_code, 200)
     self.assertQuerysetEqual(blog.context['posts'], [])
 
-    article = self.client.get(reverse('blog:post_detail', kwargs={'slug': draft_post.slug}))
+    article = self.client.get(reverse('blog:detail', kwargs={'slug': draft_post.slug}))
     self.assertEqual(article.status_code, 404)
 
   def test_unlisted_post(self):
@@ -52,11 +52,11 @@ class PostIndexViewTests(TestCase):
     If a post is a draft, it shouldn't appear in the post list but is visitable via slug
     """
     unlisted_post = create_post(author=self.user, title='Draft Post', text='This is a draft post', days=None, status='U')
-    blog = self.client.get(reverse('blog:post_list'))
+    blog = self.client.get(reverse('blog:list'))
     self.assertEqual(blog.status_code, 200)
     self.assertQuerysetEqual(blog.context['posts'], [])
 
-    article = self.client.get(reverse('blog:post_detail', kwargs={'slug': unlisted_post.slug}))
+    article = self.client.get(reverse('blog:detail', kwargs={'slug': unlisted_post.slug}))
     self.assertEqual(article.status_code, 200)
     self.assertContains(article, 'Status: Unlisted')
 
@@ -65,11 +65,11 @@ class PostIndexViewTests(TestCase):
     If a post is not a draft and has a date, it should appear in the post list and visible via slug
     """
     public_post = create_post(author=self.user, title='Public Post', text='This is a public post', days=-2, status='P')
-    blog = self.client.get(reverse('blog:post_list'))
+    blog = self.client.get(reverse('blog:list'))
     self.assertEqual(blog.status_code, 200)
     self.assertQuerysetEqual(blog.context['posts'], ['<Post: Public Post>'])
 
-    article = self.client.get(reverse('blog:post_detail', kwargs={'slug': public_post.slug}))
+    article = self.client.get(reverse('blog:detail', kwargs={'slug': public_post.slug}))
     self.assertEqual(article.status_code, 200)
     self.assertContains(article, public_post.text)
 
@@ -79,14 +79,14 @@ class PostIndexViewTests(TestCase):
     visible and change the draft field to false
     """
     draft_post = create_post(author=self.user, title='Draft Post', text='This will be published', days=None, status='D')
-    blog = self.client.get(reverse('blog:post_list'))
+    blog = self.client.get(reverse('blog:list'))
     self.assertQuerysetEqual(blog.context['posts'], [])
     self.assertEqual(draft_post.date, None)
     self.assertEqual(draft_post.status, 'D')
     
     draft_post.publish() # Post should now have a current date and draft set to False
 
-    blog = self.client.get(reverse('blog:post_list'))
+    blog = self.client.get(reverse('blog:list'))
     self.assertNotEqual(draft_post.date, None)
     self.assertEqual(draft_post.status, 'P')
     self.assertQuerysetEqual(blog.context['posts'], ['<Post: Draft Post>'])
@@ -96,7 +96,7 @@ class PostIndexViewTests(TestCase):
     If a post is not a draft but has a date in the future, it shouldn't appear in the post list
     """
     public_post = create_post(author=self.user, title='Future Post', text='Hello from the future!', days=2, status='P')
-    blog = self.client.get(reverse('blog:post_list'))
+    blog = self.client.get(reverse('blog:list'))
     self.assertEqual(blog.status_code, 200)
     self.assertContains(blog, 'No posts have been written yet!')
     self.assertQuerysetEqual(blog.context['posts'], [])

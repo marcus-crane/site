@@ -4,7 +4,7 @@ from django.views import generic
 from .models import Post
 
 class PostView(generic.ListView):
-  template_name = 'blog/post_list.html'
+  template_name = 'blog/list.html'
   context_object_name = 'posts'
 
   def get_queryset(self):
@@ -13,4 +13,4 @@ class PostView(generic.ListView):
 
 class PostDetailView(generic.DetailView):
   model = Post
-  template_name = 'blog/post_detail.html'
+  template_name = 'blog/detail.html'

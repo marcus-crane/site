@@ -37,8 +37,7 @@ class Post(models.Model):
         Return the id of the previous post
         """
         try:
-            prev = Post.objects.get(id=self.id - 1).slug
-            return prev
+            return Post.objects.get(id=self.id - 1).slug
         except:
             return None
 
@@ -48,8 +47,7 @@ class Post(models.Model):
         """
         #return Post.objects.get(id=self.id + 1).slug
         try:
-            next = Post.objects.get(id=self.id + 1)
-            return next.slug
+            return Post.objects.get(id=self.id + 1).slug
         except:
             return None
 
