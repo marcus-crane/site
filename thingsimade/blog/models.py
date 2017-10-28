@@ -37,31 +37,6 @@ class Post(models.Model):
         created = str(self.date)
         return maya.when(created).slang_time()
 
-    def prev(self):
-        """
-        Return the id of the previous post
-        """
-        try:
-            return Post.objects.get(id=self.id - 1).slug
-        except:
-            return None
-
-    def next(self):
-        """
-        Return the id of the next post
-        """
-        #return Post.objects.get(id=self.id + 1).slug
-        try:
-            return Post.objects.get(id=self.id + 1).slug
-        except:
-            return None
-
-    def pull_excerpt(self):
-        """
-        Pull the first paragraph of a post to use in the post list
-        """
-        return self.text.split('\n')[0]
-
     def publish(self):
         """
         Publish a post which sets a date making it publically visible
