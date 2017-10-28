@@ -10,7 +10,7 @@
         {% if post.status not in "P" %}
         <p id="status">Status: {{ post.get_status_display }}</p>
         {% else %}
-        <p id="published_date">Written on {{ post.date|date:"N m, Y" }}</p>
+        <p id="published_date">This post was written {{ post.time_since }}</p>
         {% endif %}
       </div>
     </header>

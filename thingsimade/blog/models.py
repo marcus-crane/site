@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
 from markdown2 import markdown
+import maya
 
 class Post(models.Model):
     POST_STATUS = (
@@ -13,7 +14,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=40, blank=True)
     text = models.TextField()
-    date = models.DateTimeField(
+    date = models.DateField(
             'Publication date',
             blank=True, null=True)
     status = models.CharField(max_length=1,
@@ -31,6 +32,10 @@ class Post(models.Model):
         Render post markdown to HTML with code highlighting support.
         """
         return markdown(self.text, extras=['fenced-code-blocks'])
+
+    def time_since(self):
+        created = str(self.date)
+        return maya.when(created).slang_time()
 
     def prev(self):
         """
