@@ -6,5 +6,13 @@
 {% block navlink %}/projects{% endblock %}
 
 {% block content %}
-<h1>Test</h1>
+  <ul class="list p10 measure center">
+    {% for project in projects %}
+    <li class="lh-copy pv3 ba bl-0 bt-0 br-0 b--dotted b--black-30">
+          <a href="{% url 'projects:detail' project.slug %}">{{ project.title }}</a>
+    </li>
+    {% empty %}
+    <b class="db f4 mb1">No projects have been posted yet!</b>
+    {% endfor %}
+  </ul>
 {% endblock %}
