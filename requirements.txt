@@ -1,7 +1,17 @@
+dateparser==0.6.0
 Django==2.0b1
+humanize==0.5.1
 Markdown==2.6.9
 markdown2==2.3.4
+maya==0.3.3
 olefile==0.44
+pendulum==1.3.1
 Pillow==4.3.0
 Pygments==2.2.0
+python-dateutil==2.6.1
 pytz==2017.2
+pytzdata==2017.3
+regex==2017.9.23
+ruamel.yaml==0.15.34
+six==1.11.0
+tzlocal==1.4
