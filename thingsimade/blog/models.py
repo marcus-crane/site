@@ -6,9 +6,9 @@ import maya
 
 class Post(models.Model):
     POST_STATUS = (
-        ('D', 'Draft'),
-        ('U', 'Unlisted'),
-        ('P', 'Published'),
+        ('D', u'✍︎ Draft'),
+        ('U', u'⏏︎ Unlisted'),
+        ('P', u'✔ Published'),
     )
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
