@@ -4,12 +4,13 @@
 
 {% block content %}
   <ul class="list p10 measure center">
+    <h2 class="f4 fw6 ph0 mh0">Blog Posts</h2>
     {% for post in posts %}
-    <li class="lh-copy pv3 ba bl-0 bt-0 br-0 b--dotted b--black-30">
+    <li class="mv3">
           <a href="{% url 'blog:detail' post.slug %}">{{ post.title }}</a>
     </li>
     {% empty %}
-      <li class="lh-copy pv3 ba bl-0 bt-0 br-0 b--dotted b--black-30">
+      <li class="mv3">
         <b class="db f4 mb1">No posts have been written yet!</b>
       </li>
     {% endfor %}

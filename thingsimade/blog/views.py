@@ -8,8 +8,8 @@ class PostView(generic.ListView):
   context_object_name = 'posts'
 
   def get_queryset(self):
-    """ Order posts by date in descending order."""
-    return Post.objects.filter(date__lte=timezone.now()).order_by('-date')
+    """ Fetch only published posts, and order by descending date """
+    return Post.objects.filter(date__lte=timezone.now(), status="P").order_by('-date')
 
 class PostDetailView(generic.DetailView):
   model = Post

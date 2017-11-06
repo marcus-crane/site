@@ -12,7 +12,8 @@ class Post(models.Model):
     )
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=40, blank=True)
+    slug = models.SlugField(max_length=40, blank=True, unique=True)
+    summary = models.CharField(max_length=140)
     text = models.TextField()
     date = models.DateField(
             'Publication date',
