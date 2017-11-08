@@ -23,3 +23,19 @@
     </section>
   </article>
 {% endblock %}
+
+{% if post.head %}
+  {% block head %}
+    {% autoescape off %}
+      {{ post.head }}
+    {% endautoescape %}
+  {% endblock %}
+{% endif %}
+
+{% if post.foot %}
+  {% block foot %}
+    {% autoescape off %}
+      {{ post.foot }}
+    {% endautoescape %}
+  {% endblock %}
+{% endif %}
