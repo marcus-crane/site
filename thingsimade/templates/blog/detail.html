@@ -3,22 +3,22 @@
 {% block title %}{{ post.title }} | utf9k{% endblock %}
 
 {% block content %}
-  <article class="measure center">
-    <header>
-      <h1 class="b" id="title">{{ post.title }}</h1>
-      <div class="meta">
-        {% if post.status not in "P" %}
-        <p id="status">Status: {{ post.get_status_display }}</p>
+  <article class="cf ph3 ph5-ns pv5">
+    <header class="fn fl-ns w-50-ns pr4-ns">
+      <h1 class="mb3 mt0 lh-title">{{ post.title }}</h1>
+      <time class="f6 ttu tracked gray">
+        {% if post.status == "P" %}
+          {{ post.date }}
+        {% elif post.date != "P" and post.date != None %}
+          {{ post.get_status_display }} | {{ post.date }}
         {% else %}
-          {% if post.date %}
-          <p id="published_date">This post was written {{ post.time_since }}</p>
-          {% endif %}
+          {{ post.get_status_display }}
         {% endif %}
-      </div>
+      </time>
     </header>
-    <section>
-      {{ post.render|safe }}
-    </section>
+    <div class="fn fl-ns w-50-ns">
+      <p class="lh-copy measure mt4 mt0-ns">{{ post.render|safe }}</p>
+    </div>
   </article>
 {% endblock %}
 
