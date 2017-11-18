@@ -7,8 +7,8 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = 'supersecretkey'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-ALLOWED_HOSTS = ['localhost']
+DEBUG = True
+ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
@@ -93,6 +93,6 @@ STATIC_URL = '/static/'
 if os.environ['USER'] == 'sentry':
     STATIC_URL = 'http://static.thingsima.de/'
     DEBUG = False
-    ALLOWED_HOSTS = ['http://thingsima.de', 'http://www.thingsima.de']
+    ALLOWED_HOSTS = ['thingsima.de', 'www.thingsima.de']
     with open('/etc/django/site_secret.txt') as key:
         SECRET_KEY = key.read().strip()
