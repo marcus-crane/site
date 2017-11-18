@@ -17,25 +17,19 @@
       </div>
     </header>
     <section>
-      {% autoescape off %}
-        {{ post.render }}
-      {% endautoescape %}
+      {{ post.render|safe }}
     </section>
   </article>
 {% endblock %}
 
 {% if post.head %}
   {% block head %}
-    {% autoescape off %}
-      {{ post.head }}
-    {% endautoescape %}
+    {{ post.head|safe }}
   {% endblock %}
 {% endif %}
 
 {% if post.foot %}
   {% block foot %}
-    {% autoescape off %}
-      {{ post.foot }}
-    {% endautoescape %}
+    {{ post.foot|safe }}
   {% endblock %}
 {% endif %}

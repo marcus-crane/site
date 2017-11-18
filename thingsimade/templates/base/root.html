@@ -8,7 +8,8 @@
         <link href="{% static 'base/tachyons.min.css' %}" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=NTR" type="text/css" rel="stylesheet" />
         <link href="{% static 'base/style.css' %}" type="text/css" rel="stylesheet" />
-        {% block head %}{% endblock %}
+        {% block head %}
+        {% endblock %}
     </head>
     <body>
         <nav class="pa3">
@@ -23,6 +24,7 @@
             {% block content %}
             {% endblock %}
         </section>
-        {% block foot %}{% endblock %}
+        {% block foot %}
+        {% endblock %}
     </body>
 </html>

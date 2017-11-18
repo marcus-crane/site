@@ -15,8 +15,8 @@ class Post(models.Model):
     slug = models.SlugField(max_length=40, blank=True, unique=True)
     summary = models.CharField(max_length=140)
     text = models.TextField()
-    head = models.TextField(blank=True, null=True)
-    foot = models.TextField(blank=True, null=True)
+    head = models.TextField(blank=True)
+    foot = models.TextField(blank=True)
     date = models.DateField(
             'Publication date',
             blank=True, null=True)
