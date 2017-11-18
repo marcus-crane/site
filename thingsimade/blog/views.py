@@ -13,4 +13,5 @@ class PostView(generic.ListView):
 
 class PostDetailView(generic.DetailView):
   model = Post
+  queryset = Post.objects.exclude(status='D')
   template_name = 'blog/detail.html'

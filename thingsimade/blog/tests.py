@@ -58,7 +58,7 @@ class PostIndexViewTests(TestCase):
 
     article = self.client.get(reverse('blog:detail', kwargs={'slug': unlisted_post.slug}))
     self.assertEqual(article.status_code, 200)
-    self.assertContains(article, 'Status: Unlisted')
+    self.assertContains(article, 'Unlisted')
 
   def test_published_post(self):
     """
