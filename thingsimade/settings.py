@@ -4,7 +4,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'hijbiq(=rk$(#x9@0%w#)0od86i^3m765ut#m+@1a3aw5d=ofv'
+SECRET_KEY = 'supersecretkey'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -86,8 +86,13 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+# Static files
+STATIC_URL = '/static/'
 
-# Static files (CSS, JavaScript, Images)
-STATIC_URL = '/static/' # Development
-# STATIC_URL = 'http://static.thingsima.de/' # Production
-
+# Production settings
+if os.environ['USER'] == 'sentry':
+    STATIC_URL = 'http://static.thingsima.de/'
+    DEBUG = False
+    ALLOWED_HOSTS = ['http://thingsima.de', 'http://www.thingsima.de']
+    with open('/etc/django/site_secret.txt') as key:
+        SECRET_KEY = key.read().strip()
