@@ -97,6 +97,7 @@ STATIC_URL = '/static/'
 
 # API Keys
 LAST_FM = config['keys']['lastfm']
+STEAM = config['keys']['steam']
 
 # Production settings
 if os.environ['USER'] == 'sentry':
