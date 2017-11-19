@@ -7,7 +7,7 @@ def lastfm(request):
         url = ('http://ws.audioscrobbler.com/2.0/?'
                'method=user.getrecenttracks'
                '&user=sentryism&api_key={}'
-               '&format=json&limit=15'.format(setjtings.LAST_FM))
+               '&format=json&limit=15'.format(settings.LAST_FM))
         r = requests.get(url)
         data = r.json()
         tracks = data["recenttracks"]["track"]
