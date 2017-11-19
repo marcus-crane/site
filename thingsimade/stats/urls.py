@@ -6,5 +6,6 @@ from . import views
 app_name = 'stats'
 urlpatterns = [
     path('', TemplateView.as_view(template_name='stats/index.html'), name='index'),
-    path('lastfm/', views.lastfm, name='lastfm')
+    path('lastfm/', views.lastfm, name='lastfm'),
+    path('steam/', views.steam, name='steam'),
 ]

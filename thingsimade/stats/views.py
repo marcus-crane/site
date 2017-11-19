@@ -44,7 +44,6 @@ def steam(request):
             title['banner'] = ('http://cdn.edgecast.steamstatic.com/steam/'
                                'apps/{}/header.jpg'.format(game['appid']))
             games[index] = title
-        print(games)
         return render(request, 'stats/steam.html', { 'games': games })
     except Exception as error:
         return render(request, '500.html')
