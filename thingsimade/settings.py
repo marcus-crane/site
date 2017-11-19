@@ -97,6 +97,7 @@ STATIC_URL = '/static/'
 
 # API Keys
 LAST_FM = config['keys']['lastfm']
+RECAPTCHA = '6LdtITYUAAAAAA-iThAoHjgAacMux1ge6g1G4ulg'
 STEAM = config['keys']['steam']
 
 # Production settings
