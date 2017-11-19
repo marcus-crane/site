@@ -1,5 +1,0 @@
-* Draft posts should not have, or render at, a slug
-* Comb through settings to see if any unneeded features are enabled
-* Write a README
-* Failing to do captcha or message in contact form should have client side validation
-* Prev and Next buttons operate based on post id, not post date

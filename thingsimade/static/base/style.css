@@ -2,15 +2,9 @@
 
 * {
     color: #000;
-    font-family: 'NTR', Helvetica, sans-serif;
+    font-family: Helvetica, sans-serif;
     font-size: 1em;
     font-weight: 400;
-}
-
-/* Navbar */
-
-nav a.b {
-    font-size: 1.2em;
 }
 
 /* Home */
@@ -38,6 +32,10 @@ article #pager { flex: 1; }
 .meta p {
     font-style: italic;
     margin: 0;
+}
+
+#content p:first-child {
+  margin-top: 0;
 }
 
 /* Pygments */

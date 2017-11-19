@@ -6,19 +6,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#317EFB" />
         <link href="{% static 'base/tachyons.min.css' %}" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=NTR" type="text/css" rel="stylesheet" />
         <link href="{% static 'base/style.css' %}" type="text/css" rel="stylesheet" />
         {% block head %}
         {% endblock %}
     </head>
     <body>
         <nav class="pa3">
-            <a class="link hover-hot-pink b f6 f5-ns dib mr3" href="{% block navlink %}{% url 'blog:list' %}{% endblock %}" title="Home">{% block nav %}utf9k{% endblock %}</a>
-            <a class="link hover-red f6 f5-ns dib mr3" href="/" title="root">home</a>
-            <a class="link hover-red f6 f5-ns dib mr3" href="/projects" title="About">projects</a>
-            <a class="link hover-red f6 f5-ns dib mr3" href="/blog" title="About">blog</a>
-            <a class="link hover-red f6 f5-ns dib mr3" href="/about" title="About">reviews</a>
-            <a class="link hover-red f6 f5-ns dib" href="/contact" title="Contact">contact</a>
+            <a class="link hover-hot-pink b f6 f5-ns dib" href="{% block navlink %}{% url 'blog:list' %}{% endblock %}" title="back to the start of this category">{% block nav %}utf9k{% endblock %}</a>
+            <a class="ml2 mr2 b f6 f5-ns" title="nav breaker">~</a>
+            <a class="f6 fw6 hover-blue link mr2 dib" href="/" title="right back to the start">front page</a>
+            <a class="f6 fw6 hover-blue link mr2 dib" id="projects" href="/projects" title="things i literally made">projects</a>
+            <a class="f6 fw6 hover-blue link mr2 dib" id="blog" href="/blog" title="words and letters">blog</a>
+            <a class="f6 fw6 hover-blue link mr2 dib" id="reviews" href="/reviews" title="i think these are good opinions">reviews</a>
+            <a class="f6 fw6 hover-blue link mr2 dib" id="contact" href="/contact" title="get in touch!">contact</a>
         </nav>
         <section class="pa3 bt b--black-10 black-70">
             {% block content %}

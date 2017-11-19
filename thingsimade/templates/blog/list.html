@@ -3,16 +3,13 @@
 {% block title %}utf9k{% endblock %}
 
 {% block content %}
-  <ul class="list p10 measure center">
-    <h2 class="f4 fw6 ph0 mh0">Blog Posts</h2>
+  <ul class="list ph3 ph5-ns pv4">
     {% for post in posts %}
-    <li class="mv3">
-          <a href="{% url 'blog:detail' post.slug %}">{{ post.title }}</a>
-    </li>
-    {% empty %}
-      <li class="mv3">
-        <b class="db f4 mb1">No posts have been written yet!</b>
+      <li class="dib mr2">
+        <a href="{{ post.slug }}" class="f6 f5-ns b db pa2 link mid-gray hover-hot-pink">{{ post.title }}</a>
       </li>
+    {% empty %}
+        <b class="db f4 mb1">No posts have been written yet!</b>
     {% endfor %}
-  </ul>
+  </section>
 {% endblock %}
