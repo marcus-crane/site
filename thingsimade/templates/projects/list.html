@@ -3,18 +3,21 @@
 {% block title %}projects | things i made{% endblock %}
 
 {% block nav %}cool stuff{% endblock %}
-{% block navlink %}/projects{% endblock %}
+{% block projects %}[ projects ]{% endblock %}
 
 {% block content %}
-  <ul class="list p10 measure center">
-    <h2 class="f4 fw6 ph0 mh0">Projects</h2>
+  <ul class="list pl0">
     {% for project in projects %}
-    <li class="mv3 ba bl-0 bt-0 br-0 b--dotted b--black-30">
-          <a href="{% url 'projects:detail' project.slug %}">{{ project.title }}</a>
-          <p>{{ project.summary }}</p>
+    <li class="pa3 pa4-ns bb b--black-10">
+      <b class="db f3 mb1">
+        {{ project.title }}
+      </b>
+      <span class="f5 db lh-copy measure">
+        {{ project.summary }}
+      </span>
     </li>
     {% empty %}
-    <b class="db f4 mb1">No projects have been posted yet!</b>
+    <b class="db f3 mb1">Hmm, no projects have been published yet!</b>
     {% endfor %}
   </ul>
 {% endblock %}

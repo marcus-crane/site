@@ -1,0 +1,27 @@
+{% extends 'base/root.html' %}
+
+{% block title %}stats | things i made{% endblock %}
+
+{% block nav %}104% accurate{% endblock %}
+{% block home %}[ stats ]{% endblock %}
+
+{% block content %}
+    <article>
+        <h2 class="f4 fw6">Recent LastFM Scrobbles</h2>
+        <div class="cf pa2">
+            {% for _, track in music.items %}
+            <div class="fl w-50 w-25-m w-20-l pa2">
+              <a href="{{ track.url }}" target="_blank" rel="noopener noreferrer" class="db link dim tc">
+                <img src="{{ track.image }}" class="w-100 db outline black-10"/>
+                <dl class="mt2 f6 lh-copy">
+                  <dt class="clip">Title</dt>
+                  <dd class="ml0 black truncate w-100">{{ track.name }}</dd>
+                  <dt class="clip">Artist</dt>
+                  <dd class="ml0 gray truncate w-100">{{ track.artist }}</dd>
+                </dl>
+              </a>
+            </div>
+            {% endfor %}
+        </div>
+    </article>
+{% endblock %}

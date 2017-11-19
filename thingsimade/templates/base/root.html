@@ -11,14 +11,18 @@
         {% endblock %}
     </head>
     <body>
-        <nav class="pa3">
-            <a class="link hover-hot-pink b f6 f5-ns dib" href="{% block navlink %}{% url 'blog:list' %}{% endblock %}" title="back to the start of this category">{% block nav %}utf9k{% endblock %}</a>
-            <a class="ml2 mr2 b f6 f5-ns" title="nav breaker">~</a>
-            <a class="f6 fw6 hover-blue link mr2 dib" href="/" title="right back to the start">front page</a>
-            <a class="f6 fw6 hover-blue link mr2 dib" id="projects" href="/projects" title="things i literally made">projects</a>
-            <a class="f6 fw6 hover-blue link mr2 dib" id="blog" href="/blog" title="words and letters">blog</a>
-            <a class="f6 fw6 hover-blue link mr2 dib" id="reviews" href="/reviews" title="i think these are good opinions">reviews</a>
-            <a class="f6 fw6 hover-blue link mr2 dib" id="contact" href="/contact" title="get in touch!">contact</a>
+        <nav class="db dt-ns mw9 center w-100">
+            <div class="pa3 pl3 db dtc-ns v-mid tl w-50">
+                <a class="link hover-hot-pink b f6 f5-ns dib">{% block nav %}utf9k{% endblock %}</a>
+            </div>
+            <div class="pa3 pr3 db dtc-ns v-mid w-100 tl tr-ns mt2 mt0-ns">
+                <a class="f6 fw6 hover-blue link mr2 dib" href="/" title="right back to the start">{% block home %}home{% endblock %}</a>
+                <a class="f6 fw6 hover-blue link mr2 dib" href="/projects" title="things i literally made">{% block projects %}projects{% endblock %}</a>
+                <a class="f6 fw6 hover-blue link mr2 dib" href="/blog" title="words and letters">{% block blog %}blog{% endblock %}</a>
+                <a class="f6 fw6 hover-blue link mr2 dib" href="/reviews" title="i think these are good opinions">{% block reviews %}reviews{% endblock %}</a>
+                <a class="f6 fw6 hover-blue link mr2 dib" href="/stats" title="see what i've been up to">{% block stats %}stats{% endblock %}</a>
+                <a class="f6 fw6 hover-blue link mr2 dib" href="/contact" title="get in touch!">{% block contact %}contact{% endblock %}</a>
+            </div>
         </nav>
         <section class="pa3 bt b--black-10 black-70">
             {% block content %}

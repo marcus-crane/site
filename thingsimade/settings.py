@@ -18,11 +18,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'thingsimade.projects',
-    'thingsimade.contact',
     'thingsimade.base',
     'thingsimade.blog',
-    'thingsimade'
+    'thingsimade.contact',
+    'thingsimade.projects',
+    'thingsimade.stats',
+    'thingsimade',
 ]
 
 MIDDLEWARE = [
@@ -88,6 +89,9 @@ USE_TZ = True
 
 # Static files
 STATIC_URL = '/static/'
+
+# API Keys
+LAST_FM = 'LAST_FM_KEY'
 
 # Production settings
 if os.environ['USER'] == 'sentry':
