@@ -1,10 +1,15 @@
+import configparser
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+# Load in API keys and other secrets
+config = configparser.ConfigParser()
+config.read(BASE_DIR + '/keys.ini')
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'supersecretkey'
+SECRET_KEY = 'supersecretkey123pleasedontsteal'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -91,12 +96,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # API Keys
-LAST_FM = 'LAST_FM_KEY'
+LAST_FM = config['keys']['lastfm']
 
 # Production settings
 if os.environ['USER'] == 'sentry':
     STATIC_URL = 'http://static.thingsima.de/'
     DEBUG = False
     ALLOWED_HOSTS = ['thingsima.de', 'www.thingsima.de']
-    with open('/etc/django/site_secret.txt') as key:
-        SECRET_KEY = key.read().strip()
+    SECRET_KEY = config['keys']['django']

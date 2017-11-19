@@ -1,0 +1,14 @@
+{% extends 'base/root.html' %}
+
+{% block title %}500 internal server error{% endblock %}
+
+{% block nav %}#{% endblock %}
+{% block navlink %}/{% endblock %}
+
+{% block content %}
+  <div class="ph5 pv6 black-70">
+    <h1>ERROR 500 server machine broke</h1>
+    <p>Woops, whatever we just tried to do just failed horribly!</p>
+    <p>I'd appreciate it if you give me a heads up via my <a href="/contact">contact</a> page</p>
+  </div>
+{% endblock %}
