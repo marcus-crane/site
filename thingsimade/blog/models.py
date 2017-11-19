@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 from django.utils.text import slugify
 from markdown2 import markdown
 import maya
@@ -13,7 +12,6 @@ class Post(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=40, blank=True, unique=True)
-    summary = models.CharField(max_length=140)
     text = models.TextField()
     head = models.TextField(blank=True)
     foot = models.TextField(blank=True)
@@ -39,14 +37,6 @@ class Post(models.Model):
     def time_since(self):
         created = str(self.date)
         return maya.when(created).slang_time()
-
-    def publish(self):
-        """
-        Publish a post which sets a date making it publically visible
-        """
-        self.status = 'P'
-        self.date = timezone.now()
-        self.save()
 
     def __str__(self):
         return self.title
