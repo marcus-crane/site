@@ -23,12 +23,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'thingsimade.base',
-    'thingsimade.blog',
-    'thingsimade.contact',
-    'thingsimade.projects',
-    'thingsimade.stats',
     'thingsimade',
+    'base',
+    'blog',
+    'contact',
+    'projects',
+    'stats',
     'django_celery_results',
 ]
 
