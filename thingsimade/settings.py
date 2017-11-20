@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'thingsimade.projects',
     'thingsimade.stats',
     'thingsimade',
+    'django_celery_results',
 ]
 
 MIDDLEWARE = [
@@ -106,3 +107,6 @@ if os.environ['USER'] == 'sentry':
     DEBUG = False
     ALLOWED_HOSTS = ['thingsima.de', 'www.thingsima.de']
     SECRET_KEY = config['keys']['django']
+
+# Celery
+CELERY_RESULT_BACKEND = 'django-db'
