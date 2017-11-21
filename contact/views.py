@@ -3,33 +3,13 @@ from django.shortcuts import render
 import requests
 
 def contact(request):
-  render(request, 'contact/form.html')
-  try:
-    name = request.POST['name']
-    email = request.POST['email']
-    message = request.POST['message']
-    captcha = request.POST['g-recaptcha-response']
-
-    if not captcha:
-      print('please complete the captcha')
-      return render(request, 'contact/form.html')
-    
-    if not message:
-      please('please enter a message')
-      return render(request, 'contact/form.html')
-
-    url = 'https://www.google.com/recaptcha/api/siteverify'
-    payload = {
-        'secret': settings.RECAPTCHA,
-        'response': captcha
-    }
-    r = requests.post(url, data=payload)
-    response = r.json()
-
-    if response['success']:
-      return render(request, 'contact/success.html')
-    else:
-      return render(request, 'contact/form.html')
-  except Exception as error:
-    print('something broke', error)
-    return render(request, 'contact/form.html')
+  url = ('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/'
+         '?key={}&steamids=76561197999386785'.format(settings.STEAM))
+  payload = { 'User-Agent': 'http://thingsima.de <marcus@thingsima.de>' }
+  r = requests.get(url, headers=payload)
+  data = r.json()
+  state = data['response']['players'][0]['personastate']
+  if 'gameid' in data['response']['players'][0]:
+    state = 2
+  social = { 'steam': state }
+  return render(request, 'contact/social.html', { 'social': social })

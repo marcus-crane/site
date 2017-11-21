@@ -38,6 +38,23 @@ article #pager { flex: 1; }
   margin-top: 0;
 }
 
+/* Contact */
+.online {
+  border-width: .30rem;
+  background-color: rgba(18, 156, 210, 0.9);
+  padding: 0;
+}
+
+.ingame {
+  border-width: .30rem;
+  background-color: rgba(19, 167, 112, 0.8);
+  padding: 0;
+}
+
+h1 a {
+  text-decoration: none;
+}
+
 /* Pygments */
 
 .codehilite { padding: 1em; }
