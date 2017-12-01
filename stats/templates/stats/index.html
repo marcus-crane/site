@@ -9,13 +9,13 @@
     <article>
         <h2 class="f4 fw6">Recently listened</h2>
         <div class="cf pa2">
-            {% for _, song in music.items %}
+            {% for album in albums %}
             <div class="fl w-50 w-25-m w-20-l pa2">
-              <a href="{{ song.url }}" target="_blank" rel="noopener noreferrer" class="db link dim tc">
-                <img src="{{ song.cover }}" class="w-100 db outline black-10"/>
+              <a href="{{ album.url }}" target="_blank" rel="noopener noreferrer" class="db link dim tc">
+                <img src="{{ album.cover }}" width="300px" class="w-100 db outline black-10"/>
                 <dl class="mt2 f6 lh-copy">
-                  <dd class="ml0 black truncate w-100">{{ song.name }}</dd>
-                  <dd class="ml0 gray truncate w-100">{{ song.artist }}</dd>
+                  <dd class="ml0 black truncate w-100">{{ album.name }}</dd>
+                  <dd class="ml0 gray truncate w-100">{{ album.artist }}</dd>
                 </dl>
               </a>
             </div>

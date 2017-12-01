@@ -7,6 +7,9 @@ class Album(models.Model):
     playcount = models.IntegerField()
     url = models.URLField()
 
+    def __str__(self):
+        return self.name
+
 class Episode(models.Model):
     show = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
