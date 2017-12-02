@@ -9,9 +9,11 @@
   <ul class="list pl0">
     {% for project in projects %}
     <li class="pa3 pa4-ns bb b--black-10">
-      <b class="db f3 mb1">
-        {{ project.title }}
-      </b>
+      <a href="{{ project.slug }}">
+        <b class="db f3 mb1">
+          {{ project.title }}
+        </b>
+      </a>
       <span class="f5 db lh-copy measure">
         {{ project.summary }}
       </span>
