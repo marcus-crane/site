@@ -7,8 +7,8 @@ import requests
 from .models import Album
 
 def stats(request):
-    def lastfm():
-        return Album.objects.all()
+    # def lastfm():
+    #     return Album.objects.all()
 
     def steam():
         try:
@@ -33,4 +33,4 @@ def stats(request):
         except Exception as error:
             return render(request, '500.html')
 
-    return render(request, 'stats/index.html', { 'games': steam(), 'albums': lastfm() })
+    return render(request, 'stats/index.html', { 'games': steam() })
