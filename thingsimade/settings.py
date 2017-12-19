@@ -107,5 +107,12 @@ if os.environ['USER'] == 'sentry':
     ALLOWED_HOSTS = ['thingsima.de', 'www.thingsima.de']
     SECRET_KEY = config['keys']['django']
 
+# Email settings
+EMAIL_HOST = config['email']['host']
+EMAIL_HOST_USER = config['email']['user']
+EMAIL_HOST_PASSWORD = config['email']['password']
+EMAIL_PORT = config['email']['port']
+EMAIL_USE_SSL = True
+
 # Celery
 CELERY_RESULT_BACKEND = 'django-db'

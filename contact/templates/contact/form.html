@@ -6,26 +6,27 @@
 {% block contact %}[ contact ]{% endblock %}
 
 {% block content %}
-<form class="pa4 black-80" method="POST" action="http://localhost:8000/contact/">
+<form class="pa4 black-80" method="POST" action="/contact/">
   {% csrf_token %}
   <legend class="f4 fw6 ph0 mh0">Got some feedback or perhaps a compliment?</legend>
+  <small class="f6 black-60 db mb2">Note: Hitting send may take a wee bit to fire off your message</small>
   </br>
   <div class="measure">
-    <label for="name" class="f6 b db mb2">Name <span class="normal black-60">(optional)</span></label>
-    <input id="name" name="name" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="name-desc">
-    <small id="name-desc" class="f6 black-60 db mb2">If you'd like a reply, let me know who I'm replying to!</small>
+    <label for="name" class="f6 b db mb2">Name</span></label>
+    <input id="name" name="name" placeholder="Dale Cooper" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="name-desc">
+    <small id="name-desc" class="f6 black-60 db mb2">I'd like to know who I'm reply to</small>
   </div>
   <br />
   <div class="measure">
-    <label for="email" class="f6 b db mb2">Email Address <span class="normal black-60">(optional)</span></label>
-    <input id="email" name="email" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="email" aria-describedby="email-desc">
-    <small id="email-desc" class="f6 black-60 db mb2">If you'd like a reply, let me know where to send it!</small>
+    <label for="email" class="f6 b db mb2">Email Address</label>
+    <input id="email" name="email" placeholder="douglasfirsniffer315@fbi.gov" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="email" aria-describedby="email-desc">
+    <small id="email-desc" class="f6 black-60 db mb2">You gotta let me know where to send my reply as well</small>
   </div>
   <br />
   <div>
     <label for="message" class="f6 b db mb2">Message</label>
-    <textarea id="message" name="message" class="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2" aria-describedby="message-desc"></textarea>
-    <small id="message-desc" class="f6 black-60">What's the haps?</small>
+    <textarea id="message" name="message" placeholder="Doc, when the will is invoked, the recuperative powers of the physical body are simply extraordinary." class="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2" aria-describedby="message-desc"></textarea>
+    <small id="message-desc" class="f6 black-60">What's on your mind?</small>
   </div>
   <br />
   <div class="g-recaptcha" data-sitekey="6LdtITYUAAAAAFY3REOkCUqynK0vWIYKYr9G804q"></div>

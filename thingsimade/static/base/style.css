@@ -1,6 +1,6 @@
 /* Globals */
 
-h1, h2, h3, h4, h5, h6, p, a, b, dd, time {
+h1, h2, h3, h4, h5, h6, p, a, b, dd, time, input, small, label, legend, textarea, input, button {
   color: #000;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1em;
