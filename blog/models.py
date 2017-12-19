@@ -3,7 +3,6 @@ import datetime
 from django.db import models
 from django.utils.text import slugify
 from markdown2 import markdown
-import maya
 
 class Post(models.Model):
     POST_STATUS = (
@@ -41,7 +40,7 @@ class Post(models.Model):
         """
         Render post markdown to HTML with code highlighting support.
         """
-        return markdown(self.text, extras=['fenced-code-blocks'])
+        return markdown(self.text, extras=['fenced-code-blocks', 'target-blank-links', 'nofollow'])
 
     def __str__(self):
         return self.title
