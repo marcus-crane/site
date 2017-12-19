@@ -98,12 +98,11 @@ STATIC_URL = '/static/'
 
 # API Keys
 LAST_FM = config['keys']['lastfm']
-RECAPTCHA = '6LdtITYUAAAAAA-iThAoHjgAacMux1ge6g1G4ulg'
 STEAM = config['keys']['steam']
 
 # Production settings
 if os.environ['USER'] == 'sentry':
-    STATIC_URL = 'http://static.thingsima.de/'
+    STATIC_URL = 'https://static.thingsima.de/'
     DEBUG = False
     ALLOWED_HOSTS = ['thingsima.de', 'www.thingsima.de']
     SECRET_KEY = config['keys']['django']
