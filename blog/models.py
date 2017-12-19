@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 from django.utils.text import slugify
 from markdown2 import markdown
@@ -9,7 +11,6 @@ class Post(models.Model):
         ('U', u'⏏︎ Unlisted'),
         ('P', u'✔ Published'),
     )
-    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=40, blank=True, unique=True)
     text = models.TextField()
@@ -28,15 +29,19 @@ class Post(models.Model):
         self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
 
+    def publish(self):
+        """
+        Convert a draft or unlisted post to be visible right now
+        """
+        self.date = datetime.datetime.now()
+        self.status = 'P'
+        self.save()
+
     def render(self):
         """
         Render post markdown to HTML with code highlighting support.
         """
         return markdown(self.text, extras=['fenced-code-blocks'])
-
-    def time_since(self):
-        created = str(self.date)
-        return maya.when(created).slang_time()
 
     def __str__(self):
         return self.title
