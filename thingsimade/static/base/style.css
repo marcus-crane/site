@@ -38,6 +38,12 @@ article #pager { flex: 1; }
   margin-top: 0;
 }
 
+.codehilite {
+  border-radius: 4px;
+  font-family: Consolas, monospace;
+  font-size: 12px;
+}
+
 /* Contact */
 .online {
   border-width: .30rem;
@@ -57,10 +63,9 @@ h1 a {
 
 /* Pygments */
 
-.codehilite { padding: 1em; }
+.codehilite { padding: 1em; background: #282828; color: #ebdbb2; background-color: #282828; }
 .codehilite pre, .codehilite p { margin: 0; }
 .codehilite .hll { background-color: #49483e }
-.codehilite  { background: #272822; color: #f8f8f2 }
 .codehilite .c { color: #75715e } /* Comment */
 .codehilite .err { color: #960050; background-color: #1e0010 } /* Error */
 .codehilite .k { color: #66d9ef } /* Keyword */
