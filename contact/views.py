@@ -10,7 +10,7 @@ def contact(request):
     name = request.POST['name']
     email = request.POST['email']
     message = request.POST['message']
-    msg = 'Name: {},\nEmail: {},\nMessage: {}'.format(name, email, message)
+    msg = 'Name: {}\nEmail: {}\nMessage: {}'.format(name, email, message)
     send_mail(
       'Mail from site | Valid: {}'.format(validity),
       msg,
