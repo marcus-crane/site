@@ -38,6 +38,16 @@ article #pager { flex: 1; }
   margin-top: 0;
 }
 
+#content h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+#content h2 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
 .codehilite {
   border-radius: 3px;
   overflow: auto;
