@@ -40,7 +40,7 @@ class Post(models.Model):
         """
         Render post markdown to HTML with code highlighting support.
         """
-        return markdown(self.text, extras=['fenced-code-blocks', 'target-blank-links', 'nofollow'])
+        return markdown(self.text, extras=['fenced-code-blocks', 'nofollow', 'tables', 'target-blank-links'])
 
     def __str__(self):
         return self.title

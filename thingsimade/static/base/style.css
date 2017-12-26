@@ -43,7 +43,7 @@ article #pager { flex: 1; }
   overflow: auto;
 }
 
-pre, .codehilite span, code {
+pre, .codehilite span, code, table, td, th {
   font-family: Menlo, Consolas, monospace;
   font-size: 90%;
 }
@@ -53,6 +53,37 @@ code {
   color: #FF8000;
   padding: 2px;
 }
+
+/* Tables (nicked from ()) */
+
+table {
+  border-collapse: collapse;
+  padding: 0;
+  width: 100%;
+  color: #FF8000; }
+  table tr {
+    background-color: #32302F;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #32302F; }
+    table tr th {
+      font-weight: bold;
+      text-align: left;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      text-align: left;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+    table tr a {
+      color: #FF8000;
+      text-decoration: none;
+    }
 
 /* Contact */
 .online {
