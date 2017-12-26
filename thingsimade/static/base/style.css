@@ -40,9 +40,10 @@ article #pager { flex: 1; }
 
 .codehilite {
   border-radius: 3px;
+  overflow: auto;
 }
 
-.codehilite span, code {
+pre, .codehilite span, code {
   font-family: Menlo, Consolas, monospace;
   font-size: 90%;
 }

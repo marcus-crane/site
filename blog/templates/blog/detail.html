@@ -4,7 +4,7 @@
 {% block blog %}[ blog ]{% endblock %}
 
 {% block content %}
-  <article class="cf ph3 ph5-ns pv5">
+  <article class="cf ph3 ph6-m ph7-l pv5">
     <header class="fn fl-ns w-50-ns pr4-ns mb3">
       <h1 class="f2 fw9 mb1 mt0">
         {{ post.title }}
@@ -19,7 +19,7 @@
         {% endif %}
       </time>
     </header>
-    <div class="fn f6 fl-ns w-50-ns" id="content">
+    <div class="fn f6 fl-ns" id="content">
       {{ post.render|safe }}
     </div>
   </article>
