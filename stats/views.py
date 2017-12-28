@@ -4,7 +4,12 @@ from django.shortcuts import render
 import pendulum
 import requests
 
+from .models import Episode
+
 def stats(request):
+    def episodes():
+        return Episode.objects.all()
+
     def lastfm():
         try:
             url = ('http://ws.audioscrobbler.com/2.0/?'
@@ -52,6 +57,7 @@ def stats(request):
                 games[index] = title
             return games
         except Exception as error:
+            print(error)
             return render(request, '500.html')
 
-    return render(request, 'stats/index.html', { 'albums': lastfm(), 'games': steam() })
+    return render(request, 'stats/index.html', { 'albums': lastfm(), 'episodes': episodes(), 'games': steam() })

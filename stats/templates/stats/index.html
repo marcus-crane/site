@@ -23,6 +23,22 @@
         </div>
     </article>
     <article>
+        <h2 class="f4 fw6">Recently watched TV</h2>
+        <div class="cf pa2">
+            {% for episode in episodes %}
+            <div class="fl w-50 w-25-m w-20-l pa2">
+              <a href="{{ episode.url }}" target="_blank" rel="noopener noreferrer" class="db link dim tc">
+                <img src="{{ episode.cover }}" class="w-100 db outline black-10"/>
+                <dl class="mt2 f6 lh-copy">
+                  <dd class="ml0 black truncate w-100">{{ episode.name }}</dd>
+                  <dd class="ml0 gray truncate w-100">{{ episode.show }}</dd>
+                </dl>
+              </a>
+            </div>
+            {% endfor %}
+        </div>
+    </article>
+    <article>
         <h2 class="f4 fw6">Steam titles played in the last 2 weeks</h2>
         <div class="cf pa2">
             {% for _, game in games.items %}
