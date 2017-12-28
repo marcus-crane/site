@@ -98,7 +98,10 @@ STATIC_URL = '/static/'
 
 # API Keys
 LAST_FM = config['keys']['lastfm']
+RECAPTCHA_PUBLIC = config['keys']['recaptcha_public']
+RECAPTCHA_PRIVATE = config['keys']['recaptcha_private']
 STEAM = config['keys']['steam']
+TRAKT = config['keys']['trakt']
 
 # Production settings
 if os.environ['USER'] == 'sentry':
