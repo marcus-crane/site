@@ -1,16 +1,6 @@
 from django.db import models
 
-class Album(models.Model):
-    name = models.CharField(max_length=200)
-    artist = models.CharField(max_length=200)
-    cover = models.URLField()
-    playcount = models.IntegerField()
-    url = models.URLField()
-
-    def __str__(self):
-        return self.name
-
-class Episode(models.Model):
+class Episodes(models.Model):
     show = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
     watched = models.DateTimeField()
@@ -19,8 +9,9 @@ class Episode(models.Model):
     tmdb = models.IntegerField()
     cover = models.URLField()
 
-class Game(models.Model):
-    steam_id = models.IntegerField()
+class Movie(models.Model):
     name = models.CharField(max_length=200)
-    banner = models.URLField()
-    playtime = models.IntegerField()
+    year = models.IntegerField()
+    watched = models.DateTimeField()
+    tmdb = models.IntegerField()
+    cover = models.URLField()

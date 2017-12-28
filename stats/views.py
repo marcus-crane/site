@@ -4,11 +4,32 @@ from django.shortcuts import render
 import pendulum
 import requests
 
-from .models import Album
-
 def stats(request):
-    # def lastfm():
-    #     return Album.objects.all()
+    def lastfm():
+        try:
+            url = ('http://ws.audioscrobbler.com/2.0/?'
+                   'method=user.getrecenttracks'
+                   '&user=sentryism&api_key={}'
+                   '&format=json&limit=10'.format(settings.LAST_FM))
+            r = requests.get(url)
+            data = r.json()
+            tracks = data['recenttracks']['track']
+            music = {}
+            for index, track in enumerate(tracks):
+                scrobble = {}
+                scrobble['album'] = track['album']['#text']
+                scrobble['artist'] = track['artist']['#text']
+                if track['image'][3]['#text'] is None:
+                    scrobble['cover'] = 'http://via.placeholder.com/350x150'
+                else:
+                    scrobble['cover'] = track['image'][3]['#text']
+                scrobble['name'] = track['name']
+                scrobble['url'] = track['url']
+                music[index] = scrobble
+            return music
+        except Exception as error:
+            print(error)
+            return render(request, '500.html')
 
     def steam():
         try:
@@ -33,4 +54,4 @@ def stats(request):
         except Exception as error:
             return render(request, '500.html')
 
-    return render(request, 'stats/index.html', { 'games': steam() })
+    return render(request, 'stats/index.html', { 'albums': lastfm(), 'games': steam() })
