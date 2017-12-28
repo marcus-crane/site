@@ -51,12 +51,14 @@ def stats(request):
             games = {}
             for index, game in enumerate(data):
                 title = {}
-                title['id'] = game['appid']
+                appid = game['appid']
                 title['name'] = game['name']
                 playtime = pendulum.interval(minutes=game['playtime_2weeks'])
                 title['playtime'] = playtime.in_words(locale='en_us')
-                title['banner'] = ('http://cdn.edgecast.steamstatic.com/steam/'
-                                   'apps/{}/header.jpg'.format(game['appid']))
+                if appid == 12230:
+                    appid = 12100
+                title['banner'] = ('https://steamcdn-a.akamaihd.net/steam/'
+                                   'apps/{}/header.jpg'.format(appid))
                 games[index] = title
             return games
         except Exception as error:
