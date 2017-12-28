@@ -39,7 +39,7 @@
         </div>
     </article>
     <article>
-        <h2 class="f4 fw6">Steam titles played in the last 2 weeks</h2>
+        <h2 class="f4 fw6">Steam titles played</h2>
         <div class="cf pa2">
             {% for _, game in games.items %}
             <div class="fl w-50 w-25-m w-20-l pa2">
@@ -51,6 +51,8 @@
                 </dl>
               </a>
             </div>
+            {% empty %}
+            <h2>I haven't played any steam games in the last 2 weeks :(</h2>
             {% endfor %}
         </div>
     </article>

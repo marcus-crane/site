@@ -44,7 +44,10 @@ def stats(request):
                    '&format=json&limit=10'.format(settings.STEAM))
             r = requests.get(url)
             data = r.json()
-            data = data['response']['games']
+            if data['response']['total_count'] == 0:
+                return None
+            else:
+                data = data['response']['games']
             games = {}
             for index, game in enumerate(data):
                 title = {}
