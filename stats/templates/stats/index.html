@@ -7,7 +7,17 @@
 
 {% block content %}
     <article>
-        <h2 class="f4 fw6">Recently listened</h2>
+      <h2 class="f4 fw6">Movies ~ Recently Watched</h2>
+      <div class="cf pa2">
+        {% for movie in movies %}
+        <a href="{{ movie.url }}" target="_blank" rel="noopener noreferrer" class="fl w-50 w-25-l link overflow-hidden hide-child">
+          <div role="img" aria-label="{{ movie.name }}" class="dim aspect-ratio--4x6 " style="background: url({{ movie.cover }}) no-repeat center center; background-size: cover;"></div>
+        </a>
+        {% endfor %}
+      </div>
+    </article>
+    <article>
+        <h2 class="f4 fw6">Music ~ Recently Listened</h2>
         <div class="cf pa2">
             {% for _, album in albums.items %}
             <div class="fl w-50 w-25-m w-20-l pa2">
@@ -23,23 +33,7 @@
         </div>
     </article>
     <article>
-        <h2 class="f4 fw6">Recently watched TV</h2>
-        <div class="cf pa2">
-            {% for episode in episodes %}
-            <div class="fl w-50 w-25-m w-20-l pa2">
-              <a href="{{ episode.url }}" target="_blank" rel="noopener noreferrer" class="db link dim tc">
-                <img src="{{ episode.cover }}" class="w-100 db outline black-10"/>
-                <dl class="mt2 f6 lh-copy">
-                  <dd class="ml0 black truncate w-100">{{ episode.name }}</dd>
-                  <dd class="ml0 gray truncate w-100">{{ episode.show }}</dd>
-                </dl>
-              </a>
-            </div>
-            {% endfor %}
-        </div>
-    </article>
-    <article>
-        <h2 class="f4 fw6">Steam titles played</h2>
+        <h2 class="f4 fw6">Steam ~ Played in the last 2 weeks</h2>
         <div class="cf pa2">
             {% for _, game in games.items %}
             <div class="fl w-50 w-25-m w-20-l pa2">
@@ -53,6 +47,22 @@
             </div>
             {% empty %}
             <h2>I haven't played any steam games in the last 2 weeks :(</h2>
+            {% endfor %}
+        </div>
+    </article>
+    <article>
+        <h2 class="f4 fw6">TV Shows ~ Recently Watched</h2>
+        <div class="cf pa2">
+            {% for episode in episodes %}
+            <div class="fl w-50 w-25-m w-20-l pa2">
+              <a href="{{ episode.url }}" target="_blank" rel="noopener noreferrer" class="db link dim tc">
+                <img src="{{ episode.cover }}" class="w-100 db outline black-10"/>
+                <dl class="mt2 f6 lh-copy">
+                  <dd class="ml0 black truncate w-100">{{ episode.name }}</dd>
+                  <dd class="ml0 gray truncate w-100">{{ episode.show }}</dd>
+                </dl>
+              </a>
+            </div>
             {% endfor %}
         </div>
     </article>

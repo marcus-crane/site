@@ -8,9 +8,10 @@ class Episode(models.Model):
     number = models.IntegerField()
     tmdb = models.IntegerField()
     cover = models.URLField()
+    url = models.URLField()
 
     def __str__(self):
-        return self.name
+        return '{}x{} {}'.format(self.season, self.number, self.name)
 
 class Movie(models.Model):
     name = models.CharField(max_length=200)
@@ -18,3 +19,7 @@ class Movie(models.Model):
     watched = models.DateTimeField()
     tmdb = models.IntegerField()
     cover = models.URLField()
+    url = models.URLField()
+
+    def __str__(self):
+        return '{} ({})'.format(self.name, self.year)

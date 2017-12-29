@@ -1,15 +1,12 @@
 from django.conf import settings
-from django.shortcuts import get_list_or_404
 from django.shortcuts import render
 import pendulum
 import requests
 
 from .models import Episode
+from .models import Movie
 
 def stats(request):
-    def episodes():
-        return Episode.objects.all()
-
     def lastfm():
         try:
             url = ('http://ws.audioscrobbler.com/2.0/?'
@@ -59,10 +56,11 @@ def stats(request):
                     appid = 12100
                 title['banner'] = ('https://steamcdn-a.akamaihd.net/steam/'
                                    'apps/{}/header.jpg'.format(appid))
+                title['url'] = 'https://store.steampowered.com/app/{}/'.format(appid)
                 games[index] = title
             return games
         except Exception as error:
             print(error)
             return render(request, '500.html')
 
-    return render(request, 'stats/index.html', { 'albums': lastfm(), 'episodes': episodes(), 'games': steam() })
+    return render(request, 'stats/index.html', { 'albums': lastfm(), 'episodes': Episode.objects.all(), 'games': steam(), 'movies': Movie.objects.all()[:4] })
