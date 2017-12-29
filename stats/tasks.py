@@ -33,6 +33,7 @@ def fetch_cover(type, tmdb_id, season=None, number=None):
             img = data['stills'][0]['file_path']
         return 'https://image.tmdb.org/t/p/w780/{}'.format(img)
 
+@shared_task
 def fetch_shows():
     data = query_trakt('episodes')
     Episode.objects.all().delete()
@@ -47,6 +48,7 @@ def fetch_shows():
             season=season, number=number, tmdb=tmdb, cover=cover,
             url = 'http://www.imdb.com/title/{}/'.format(entry['episode']['ids']['imdb']))
 
+@shared_task
 def fetch_movies():
     data = query_trakt('movies')
     Movie.objects.all().delete()
