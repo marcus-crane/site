@@ -16,55 +16,44 @@ def query_trakt(endpoint):
     if r.status_code == 200:
         return r.json()
 
-def fetch_episodes():
-    def fetch_cover(tmdb_id, season, number):
-        url = ('https://api.themoviedb.org/3/tv/{}/season/{}/episode/{}/images'
-               '?api_key={}'.format(tmdb_id, season, number, settings.TMDB))
-        r = requests.get(url)
-        if r.status_code == 200:
-            data = r.json()
-            img = data['stills'][0]['file_path']
-            return 'https://image.tmdb.org/t/p/w780' + img
-
-    def insert_ep(episode):
-        show = episode['show']['title']
-        name = episode['episode']['title']
-        watched = maya.parse(episode['watched_at']).datetime()
-        season = episode['episode']['season']
-        number = episode['episode']['number']
-        tmdb_id = episode['show']['ids']['tmdb']
-        cover = fetch_cover(tmdb_id, season, number)
-        url = 'http://www.imdb.com/title/{}/'.format(episode['episode']['ids']['imdb'])
-        Episode.objects.create(show=show, name=name, watched=watched,
-                               season=season, number=number, tmdb=tmdb_id,
-                               cover=cover, url=url)
-
-    data = query_trakt('episodes')
-    Episode.objects.all().delete()
-    for episode in data:
-        insert_ep(episode)
-
-def fetch_movies():
-    def fetch_cover(tmdb_id):
+# Season and number are optional based on type
+def fetch_cover(type, tmdb_id, season=None, number=None):
+    if type == 'movie':
         url = ('https://api.themoviedb.org/3/movie/{}/images'
                '?api_key={}'.format(tmdb_id, settings.TMDB))
-        r = requests.get(url)
-        if r.status_code == 200:
-            data = r.json()
+    if type == 'show':
+        url = ('https://api.themoviedb.org/3/tv/{}/season/{}/episode/{}/images'
+               '?api_key={}'.format(tmdb_id, season, number, settings.TMDB))
+    r = requests.get(url)
+    if r.status_code == 200:
+        data = r.json()
+        if type == 'movie':
             img = data['posters'][0]['file_path']
-            return 'https://image.tmdb.org/t/p/w780' + img
+        if type == 'show':
+            img = data['stills'][0]['file_path']
+        return 'https://image.tmdb.org/t/p/w780/{}'.format(img)
 
-    def insert_movie(entry):
-        name = entry['movie']['title']
-        year = entry['movie']['year']
-        watched = entry['watched_at']
-        tmdb = entry['movie']['ids']['tmdb']
-        cover = fetch_cover(tmdb)
-        url = 'http://www.imdb.com/title/{}/'.format(entry['movie']['ids']['imdb'])
-        Movie.objects.create(name=name, year=year, watched=watched,
-                             tmdb=tmdb, cover=cover, url=url)
+def fetch_shows():
+    data = query_trakt('episodes')
+    Episode.objects.all().delete()
+    for entry in data:
+        tmdb = entry['show']['ids']['tmdb']
+        season = entry['episode']['season']
+        number = entry['episode']['number']
+        cover = fetch_cover('show', tmdb, season, number)
+        Episode.objects.create(
+            show=entry['show']['title'], name=entry['episode']['title'],
+            watched=maya.parse(entry['watched_at']).datetime(),
+            season=season, number=number, tmdb=tmdb, cover=cover,
+            url = 'http://www.imdb.com/title/{}/'.format(entry['episode']['ids']['imdb']))
 
+def fetch_movies():
     data = query_trakt('movies')
     Movie.objects.all().delete()
     for entry in data:
-        insert_movie(entry)
+        tmdb = entry['movie']['ids']['tmdb']
+        cover = fetch_cover('movie', tmdb)
+        Movie.objects.create(
+            name=entry['movie']['title'], year=entry['movie']['year'],
+            watched=entry['watched_at'], tmdb=tmdb, cover=cover,
+            url = 'http://www.imdb.com/title/{}/'.format(entry['movie']['ids']['imdb']))
