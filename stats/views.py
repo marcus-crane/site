@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.shortcuts import render
+from django.templatetags.static import static
 import pendulum
 import requests
 
@@ -21,8 +22,8 @@ def stats(request):
                 scrobble = {}
                 scrobble['album'] = track['album']['#text']
                 scrobble['artist'] = track['artist']['#text']
-                if track['image'][3]['#text'] is None:
-                    scrobble['cover'] = 'http://via.placeholder.com/350x150'
+                if not track['image'][3]['#text']:
+                    scrobble['cover'] = static('base/unavailable.png')
                 else:
                     scrobble['cover'] = track['image'][3]['#text']
                 scrobble['name'] = track['name']
