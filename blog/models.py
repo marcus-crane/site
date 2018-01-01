@@ -3,7 +3,6 @@ import datetime
 import CommonMarkExtensions.tables
 from django.db import models
 from django.utils.text import slugify
-from markdown2 import markdown
 
 class Post(models.Model):
     POST_STATUS = (

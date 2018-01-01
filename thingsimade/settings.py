@@ -29,7 +29,6 @@ INSTALLED_APPS = [
     'contact',
     'projects',
     'stats',
-    'django_celery_results',
 ]
 
 MIDDLEWARE = [
@@ -117,6 +116,3 @@ EMAIL_HOST_USER = config['email']['user']
 EMAIL_HOST_PASSWORD = config['email']['password']
 EMAIL_PORT = config['email']['port']
 EMAIL_USE_SSL = True
-
-# Celery
-CELERY_RESULT_BACKEND = 'django-db'

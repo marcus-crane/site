@@ -1,7 +1,7 @@
+import CommonMarkExtensions.tables
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
-from markdown2 import markdown
 
 class Project(models.Model):
   title = models.CharField(max_length=200)
@@ -21,7 +21,7 @@ class Project(models.Model):
     """
     Render post markdown to HTML with code highlighting support.
     """
-    return markdown(self.text, extras=['fenced-code-blocks'])
+    return CommonMarkExtensions.tables.commonmark(self.text)
 
   def __str__(self):
     return self.title
