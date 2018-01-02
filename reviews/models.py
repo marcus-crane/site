@@ -15,7 +15,6 @@ class Review(models.Model):
 	date = models.DateField(
 			'Publication date',
 			blank=True, null=True)
-	cover = models.URLField(blank=True)
 	backdrop = models.URLField(blank=True)
 
 	def save(self, *args, **kwargs):
