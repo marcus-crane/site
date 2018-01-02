@@ -1,0 +1,16 @@
+{% extends 'base/root.html' %}
+
+{% block title %}reviews | things i made{% endblock %}
+
+{% block nav %}word combiner{% endblock %}
+{% block reviews %}[ reviews ]{% endblock %}
+
+{% block content %}
+<section class="pa3 pa4-m pa5-l">
+  {% for review in reviews %}
+  	{{ review.title }} {{ review.date }}
+  {% empty %}
+    <b class="db f4 mb1">No reviews have been written yet!</b>
+  {% endfor %}
+</section>
+{% endblock %}

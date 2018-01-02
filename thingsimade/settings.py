@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'blog',
     'contact',
     'projects',
+    'reviews', 
     'stats',
 ]
 
