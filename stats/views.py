@@ -13,8 +13,8 @@ def stats(request):
             url = ('http://ws.audioscrobbler.com/2.0/?'
                    'method=user.getrecenttracks'
                    '&user=sentryism&api_key={}'
-                   '&format=json&limit=10'.format(settings.LAST_FM))
-            r = requests.get(url)
+                   '&format=json&limit=10'.format(settings.LASTFM))
+            r = requests.get(url, headers=settings.USER_AGENT)
             data = r.json()
             tracks = data['recenttracks']['track']
             music = {}
@@ -23,7 +23,7 @@ def stats(request):
                 scrobble['album'] = track['album']['#text']
                 scrobble['artist'] = track['artist']['#text']
                 if not track['image'][3]['#text']:
-                    scrobble['cover'] = static('base/unavailable.png')
+                    scrobble['cover'] = static('base/no_cover.png')
                 else:
                     scrobble['cover'] = track['image'][3]['#text']
                 scrobble['name'] = track['name']
@@ -40,7 +40,7 @@ def stats(request):
                    'GetRecentlyPlayedGames/v0001/?key={}'
                    '&steamid=76561197999386785'
                    '&format=json&limit=10'.format(settings.STEAM))
-            r = requests.get(url)
+            r = requests.get(url, headers=settings.USER_AGENT)
             data = r.json()
             if data['response']['total_count'] == 0:
                 return None

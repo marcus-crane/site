@@ -97,7 +97,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # API Keys
-LAST_FM = config['keys']['lastfm']
+GIANTBOMB = config['keys']['giantbomb']
+LASTFM = config['keys']['lastfm']
 RECAPTCHA_PUBLIC = config['keys']['recaptcha_public']
 RECAPTCHA_PRIVATE = config['keys']['recaptcha_private']
 STEAM = config['keys']['steam']
@@ -117,3 +118,6 @@ EMAIL_HOST_USER = config['email']['user']
 EMAIL_HOST_PASSWORD = config['email']['password']
 EMAIL_PORT = config['email']['port']
 EMAIL_USE_SSL = True
+
+# User agent
+USER_AGENT = { 'User-Agent': 'https://thingsima.de <marcus@thingsima.de>' }
