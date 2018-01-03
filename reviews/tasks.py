@@ -19,7 +19,7 @@ def fetch_review_art(self):
                      headers=settings.USER_AGENT)
     im = Image.open(io.BytesIO(r.content))
     im = im.filter(ImageFilter.GaussianBlur(3))
-    im.save(settings.BASE_DIR + 'static/reviews/{}.png'.format(self.slug))
-    self.backdrop = "{}/reviews/{}.png".format(settings.STATIC_URL, self.slug)
+    im.save(settings.BASE_DIR + '/static/reviews/{}.png'.format(self.slug))
+    self.backdrop = settings.STATIC_URL + "reviews/{}.png".format(self.slug)
     self.fresh = False
     return self
