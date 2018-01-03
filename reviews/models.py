@@ -15,7 +15,7 @@ class Review(models.Model):
 	date = models.DateField(
 			'Publication date',
 			blank=True, null=True)
-	backdrop = models.URLField(blank=True)
+	backdrop = models.CharField(max_length=100, blank=True)
 
 	def save(self, *args, **kwargs):
 		"""
