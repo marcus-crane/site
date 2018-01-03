@@ -97,6 +97,7 @@ USE_TZ = True
 
 # Static files
 STATIC_URL = '/static/'
+STATIC_ROOT = '/var/www/static'
 
 # API Keys
 GIANTBOMB = config['keys']['giantbomb']
