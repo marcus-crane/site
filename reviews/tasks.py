@@ -3,7 +3,7 @@ from django.utils.text import slugify
 from celery import shared_task
 import requests
 import io
-from PIL import Image, ImageFilter
+from PIL import Image, ImageFilter, ImageOps
 
 @shared_task
 def fetch_review_art(self):
@@ -19,6 +19,7 @@ def fetch_review_art(self):
                      headers=settings.USER_AGENT)
     im = Image.open(io.BytesIO(r.content))
     im = im.filter(ImageFilter.GaussianBlur(3))
+    im = ImageOps.fit(im, (450, 50))
     im.save(settings.BASE_DIR + '/static/reviews/{}.png'.format(self.slug))
     self.backdrop = settings.STATIC_URL + "reviews/{}.png".format(self.slug)
     self.fresh = False

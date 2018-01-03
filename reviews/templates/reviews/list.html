@@ -8,8 +8,8 @@
 {% block content %}
 <section class="pa3 pa4-m pa5-l">
   {% for review in reviews %}
-  	<a href="{{ review.slug }}" class="fl w-100 w-50-ns pa3 ph5-ns bg-near-white tc link" style="background: url({{ review.backdrop }}); background-size: cover">
-  		<h1 class="b white">{{ review.title }}</h1>
+  	<a href="{{ review.slug }}" class="fl w-100 w-50-ns pa3 bg-near-white tc link" style="background: url({{ review.backdrop }}); background-size: cover">
+  		<h1 class="b f4 white">{{ review.title }}</h1>
   	</a>
   {% empty %}
     <b class="db f4 mb1">No reviews have been written yet!</b>
