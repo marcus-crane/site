@@ -7,3 +7,4 @@ pip-selfcheck.json
 __pycache__
 .DS_Store
 keys.ini
+thingsimade/static/reviews/*
