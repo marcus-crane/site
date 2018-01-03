@@ -18,6 +18,8 @@ Those are currently the main components. The main goal of my site isn't to be a 
 
 In order to get this site up and running, you'll need a version of [Python 3](https://www.python.org/downloads/), preferably recent. Anything above `3.0` should be fine but I haven't tested that claim in the slightest.
 
+You'll also need your distros respective `python3-dev` for building some of the dependencies.
+
 Once you've got Python setup, you can install the required modules with `pip install -r requirements`. The suggested way is to set up a [virtual environment](http://docs.python-guide.org/en/latest/dev/virtualenvs/) as opposed to just installing modules right into your system setup.
 
 ### RabbitMQ / Redis
