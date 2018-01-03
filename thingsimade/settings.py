@@ -1,5 +1,6 @@
 import configparser
 import os
+import raven
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -30,6 +31,7 @@ INSTALLED_APPS = [
     'projects',
     'reviews', 
     'stats',
+    'raven.contrib.django.raven_compat',
 ]
 
 MIDDLEWARE = [
@@ -121,3 +123,8 @@ EMAIL_USE_SSL = True
 
 # User agent
 USER_AGENT = { 'User-Agent': 'https://thingsima.de <marcus@thingsima.de>' }
+
+# Raven
+RAVEN_CONFIG = {
+    'dsn': config['keys']['raven'], 
+}
