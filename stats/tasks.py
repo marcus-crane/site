@@ -38,7 +38,7 @@ def fetch_cover(type, tmdb_id, season=None, number=None):
         return 'https://image.tmdb.org/t/p/w780/{}'.format(img)
 
 @periodic_task(
-    run_every=(crontab(minute='*/1')),
+    run_every=(crontab(minute='*/30')),
     name="task_fetch_shows",
     ignore_result=True
 )
@@ -57,7 +57,7 @@ def fetch_shows():
             url = 'http://www.imdb.com/title/{}/'.format(entry['episode']['ids']['imdb']))
 
 @periodic_task(
-    run_every=(crontab(minute='*/1')),
+    run_every=(crontab(minute='*/30')),
     name="task_fetch_movies",
     ignore_result=True
 )
