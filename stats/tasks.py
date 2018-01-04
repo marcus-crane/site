@@ -1,11 +1,15 @@
 from django.conf import settings
-from celery import shared_task
+from celery.task.schedules import crontab
+from celery.decorators import periodic_task
+from celery.utils.log import get_task_logger
 
 from .models import Episode
 from .models import Movie
 
 import maya
 import requests
+
+logger = get_task_logger(__name__)
 
 def query_trakt(endpoint):
     headers = { 'Content-Type': 'application/json',
@@ -33,7 +37,11 @@ def fetch_cover(type, tmdb_id, season=None, number=None):
             img = data['stills'][0]['file_path']
         return 'https://image.tmdb.org/t/p/w780/{}'.format(img)
 
-@shared_task
+@periodic_task(
+    run_every=(crontab(minute='*/1')),
+    name="task_fetch_shows",
+    ignore_result=True
+)
 def fetch_shows():
     data = query_trakt('episodes')
     Episode.objects.all().delete()
@@ -48,7 +56,11 @@ def fetch_shows():
             season=season, number=number, tmdb=tmdb, cover=cover,
             url = 'http://www.imdb.com/title/{}/'.format(entry['episode']['ids']['imdb']))
 
-@shared_task
+@periodic_task(
+    run_every=(crontab(minute='*/1')),
+    name="task_fetch_movies",
+    ignore_result=True
+)
 def fetch_movies():
     data = query_trakt('movies')
     Movie.objects.all().delete()
