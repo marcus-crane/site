@@ -15,7 +15,6 @@ class Episode(models.Model):
 
 class Movie(models.Model):
     name = models.CharField(max_length=200)
-    year = models.IntegerField()
     watched = models.DateTimeField()
     tmdb = models.IntegerField()
     cover = models.URLField()

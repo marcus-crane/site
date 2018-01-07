@@ -32,10 +32,18 @@ def fetch_cover(type, tmdb_id, season=None, number=None):
     if r.status_code == 200:
         data = r.json()
         if type == 'movie':
-            img = data['posters'][0]['file_path']
+            try:
+                poster = data['posters'][0]['file_path']
+                img = 'https://image.tmdb.org/t/p/w780{}'.format(poster)
+            except:
+                img = 'https://static.thingsima.de/base/no_cover.png'
         if type == 'show':
-            img = data['stills'][0]['file_path']
-        return 'https://image.tmdb.org/t/p/w780/{}'.format(img)
+            try:
+                still = data['stills'][0]['file_path']
+                img = 'https://image.tmdb.org/t/p/w780{}'.format(still)
+            except:
+                img = 'https://static.thingsima.de/base/no_still.png'
+        return img
 
 @periodic_task(
     run_every=(crontab(minute='*/30')),
@@ -54,7 +62,8 @@ def fetch_shows():
             show=entry['show']['title'], name=entry['episode']['title'],
             watched=maya.parse(entry['watched_at']).datetime(),
             season=season, number=number, tmdb=tmdb, cover=cover,
-            url = 'http://www.imdb.com/title/{}/'.format(entry['episode']['ids']['imdb']))
+            url = 'http://www.imdb.com/title/{}/'.format(
+                entry['episode']['ids']['imdb']))
 
 @periodic_task(
     run_every=(crontab(minute='*/30')),
@@ -68,6 +77,7 @@ def fetch_movies():
         tmdb = entry['movie']['ids']['tmdb']
         cover = fetch_cover('movie', tmdb)
         Movie.objects.create(
-            name=entry['movie']['title'], year=entry['movie']['year'],
+            name=entry['movie']['title'],
             watched=entry['watched_at'], tmdb=tmdb, cover=cover,
-            url = 'http://www.imdb.com/title/{}/'.format(entry['movie']['ids']['imdb']))
+            url = 'http://www.imdb.com/title/{}/'.format(
+                entry['movie']['ids']['imdb']))
