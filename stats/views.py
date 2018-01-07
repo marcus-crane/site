@@ -64,4 +64,9 @@ def stats(request):
             print(error)
             return render(request, '500.html')
 
-    return render(request, 'stats/index.html', { 'albums': lastfm(), 'episodes': Episode.objects.all(), 'games': steam(), 'movies': Movie.objects.all()[:4] })
+    return render(request, 'stats/index.html', { 
+        'albums': lastfm(),
+        'episodes': Episode.objects.all(),
+        'games': steam(),
+        'movies': Movie.objects.all()[:4]
+    })
