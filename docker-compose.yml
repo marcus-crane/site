@@ -3,12 +3,39 @@ version: '3'
 services:
     db:
         image: postgres
+        hostname: db
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=postgres
+        ports:
+            - "5432:5432"
+
+    rabbit:
+        image: rabbitmq
+        hostname: rabbitmq
+
     web:
-        build: .
-        command: python3 manage.py runserver 0.0.0.0:8000
+        build: .     
+        command: ./run_web.sh
+        hostname: web
         volumes:
-            - .:/docker
+            - .:/app
         ports:
             - "8000:8000"
+        links:
+            - db
+            - rabbit
         depends_on:
             - db
+
+    worker:
+        build: .
+        command: ./run_celery.sh
+        volumes:
+            - .:/app
+        links:
+            - db
+            - rabbit
+        depends_on:
+            - rabbit
