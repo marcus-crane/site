@@ -1,5 +1,6 @@
 from flask import Flask, render_template
-import mistletoe
+
+from utils import fetch_post
 
 app = Flask(__name__)
 
@@ -14,12 +15,10 @@ def blog_list():
 	]
 	return render_template('blog/list.html', posts=posts)
 
-@app.route('/blog/test')
-def blog_detail():
-	with open('test.md', 'r') as post:
-		render = mistletoe.markdown(post)
-		print(render)
-	return render_template('blog/detail.html', post=render)
+@app.route('/blog/<file>')
+def blog_detail(file):
+	post = fetch_post(file)
+	return render_template('blog/detail.html', post=post)
 
 @app.route('/contact')
 def contact():
