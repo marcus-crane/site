@@ -18,6 +18,7 @@ def blog_list():
 def blog_detail():
 	with open('test.md', 'r') as post:
 		render = mistletoe.markdown(post)
+		print(render)
 	return render_template('blog/detail.html', post=render)
 
 @app.route('/contact')
