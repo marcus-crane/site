@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 
-from utils import fetch_post
+import utils
 
 app = Flask(__name__)
 
@@ -10,14 +10,12 @@ def index():
 
 @app.route('/blog')
 def blog_list():
-	posts = [
-		{ 'title': 'Testing', 'slug': 'testing' }
-	]
+	posts = utils.get_posts('blog')
 	return render_template('blog/list.html', posts=posts)
 
 @app.route('/blog/<file>')
 def blog_detail(file):
-	post = fetch_post(file)
+	post = utils.get_post(file, 'blog')
 	return render_template('blog/detail.html', post=post)
 
 @app.route('/contact')
