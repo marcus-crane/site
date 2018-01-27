@@ -1,15 +1,42 @@
-import csv
+class Media:
 
-class Book:
-    def __init__(self, **kwargs):
-        self.title = kwargs['title']
-        self.cover = kwargs['cover']
-        self.link = kwargs['link']
-        self.overview = kwargs['overview']
-        self.author = kwargs['author']
+    def __init__(self, name, image, link):
+        self.name = name
+        self.image = image
+        self.link = link
 
-    def save(self):
-        with open('data/books.csv', 'a', newline='') as csvfile:
-            bookwriter = csv.writer(csvfile)
-            bookwriter.writerow([self.title, self.cover, self.link,
-                                  self.overview, self.author])
+    def __str__(self):
+        return self.name
+
+class Book(Media):
+
+    def __init__(self, name, image, link, author):
+        super().__init__(self, name, image, link)
+        self.author = author
+
+    def export(self):
+        book = {
+            'name': self.name, 'image': self.image,
+            'link': self.link, 'author': self.author
+        }
+        return book
+
+class Episode(Media):
+
+    def __init__(self, name, image, link, time, series):
+        super().__init__(name, image, link)
+        self.time = time
+        self.series = series
+
+class Game(Media):
+
+    def __init__(self, name, image, link, playtime):
+        super().__init__(name, image, link)
+        self.playtime = playtime
+
+class Song(Media):
+
+    def __init__(self, name, image, link, time, artist):
+        super().__init__(name, image, link)
+        self.time = time
+        self.artist = artist
