@@ -11,7 +11,7 @@ class Media:
 class Book(Media):
 
     def __init__(self, name, image, link, author):
-        super().__init__(self, name, image, link)
+        super().__init__(name, image, link)
         self.author = author
 
     def export(self):
