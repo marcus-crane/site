@@ -1,4 +1,5 @@
 from classes import Book
+import settings
 
 import mistune
 import mistune_contrib.meta as meta
@@ -23,6 +24,7 @@ def get_post(filename, dir):
 def get_posts(dir):
 	path = os.listdir('posts/{}'.format(dir))
 	posts = []
+    # Remove the '.md' bit from the end of each file
 	urls = [post[:-3] for post in path]
 	for url in urls:
 		post = {}
@@ -31,11 +33,11 @@ def get_posts(dir):
 		posts.append(post)
 	return posts
 
-def update_books():
+def update_books(key):
     def query_goodreads(key):
         url = ('https://www.goodreads.com/review/list?key={}'
                '&v%3D2&shelf=currently-reading'.format(key))
-        r = requests.get(url)
+        r = requests.get(url, headers=settings.USER_AGENT)
         return r.text
 
     def save_titles(books):
@@ -51,8 +53,8 @@ def update_books():
             entry.save()
             print('Saved {}'.format(title))
 
-    if os.path.exists('data/books.csv'):
-        os.remove('data/books.csv')
-    data = query_goodreads('68jCTWyS6m7Z03NmolK9A&id=76423177')
+    if os.path.exists('data/books.json'):
+        os.remove('data/books.json')
+    data = query_goodreads(key)
     root = ET.fromstring(data)
     save_titles(root[1])
