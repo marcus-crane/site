@@ -3,6 +3,7 @@ import settings
 
 import mistune
 import mistune_contrib.meta as meta
+from pytvdbapi import api
 import requests
 
 import json
@@ -116,29 +117,33 @@ def query_trakt(endpoint):
     if r.status_code == 200:
         return r.json()
 
-def fetch_cover(type, tmdb_id, season=None, number=None):
+def fetch_cover(type, tmdb_id, season=None, number=None, series=None):
     if type == 'movie':
         url = ('https://api.themoviedb.org/3/movie/{}/images'
                '?api_key={}'.format(tmdb_id, settings.TMDB))
-    if type == 'show':
-        url = ('https://api.themoviedb.org/3/tv/{}/season/{}/episode/{}/images'
-               '?api_key={}'.format(tmdb_id, season, number, settings.TMDB))
-        r = requests.get(url)
-        if r.status_code == 200:
+        headers = { 'User-Agent': settings.USER_AGENT }
+        r = requests.get(url, headers=headers)
+        try:
             data = r.json()
-            if type == 'movie':
-                try:
-                    poster = data['posters'][0]['file_path']
-                    img = 'https://image.tmdb.org/t/p/w780{}'.format(poster)
-                except:
-                    img = '/static/img/no_cover.png'
-            if type == 'show':
-                try:
-                    still = data['stills'][0]['file_path']
-                    img = 'https://image.tmdb.org/t/p/w780{}'.format(still)
-                except:
-                    img = '/static/img/no_still.png'
-            return img
+            poster = data['posters'][0]['file_path']
+            img = 'https://image.tmdb.org/t/p/w500{}'.format(poster)
+        except:
+            img = '/static/img/no_cover.png'
+
+    if type == 'show':
+        db = api.TVDB(settings.TVDB)
+        result = db.search(series, 'en')
+        try:
+            show = result[0]
+            url = show[season][number].filename
+            if url != '':
+                img = 'https://www.thetvdb.com/banners/{}'.format(url)
+            else:
+                raise
+        except:
+            img = '/static/img/no_still.png'
+
+    return img
 
 def update_shows():
     def fetch_shows(data):
@@ -149,10 +154,10 @@ def update_shows():
             season = entry['episode']['season']
             number = entry['episode']['number']
 
-            name = entry['episode']['title']
-            image = fetch_cover('show', tmdb, season, number)
-            link = 'http://www.imdb.com/title/{}/'.format(url)
             series = entry['show']['title']
+            name = entry['episode']['title']
+            image = fetch_cover('show', tmdb, season, number, series)
+            link = 'http://www.imdb.com/title/{}/'.format(url)
 
             episode = Episode(name, image, link, series)
             episode = episode.export()
