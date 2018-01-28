@@ -11,7 +11,9 @@
     <div class="cf pa2">
           {% for book in books %}
           <dl class="mt2 f6 lh-copy">
-            <dd class="ml0 black truncate w-100">{{ book.name }} by {{ book.author }}</dd>
+            <dd class="ml0 black truncate w-100">
+              <a href="{{ book.link }}">{{ book.name }}</a> by {{ book.author }}
+            </dd>
           </dl>
     {% endfor %}
     </div>

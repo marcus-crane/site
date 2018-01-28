@@ -3,9 +3,11 @@ import settings
 
 import mistune
 import mistune_contrib.meta as meta
+import PyRSS2Gen
 from pytvdbapi import api
 import requests
 
+import datetime
 import json
 import os
 import xml.etree.ElementTree as ET
@@ -34,6 +36,27 @@ def get_posts(dir):
 		post['slug'] = url
 		posts.append(post)
 	return posts
+
+def generate_rss(section):
+    posts = get_posts(section)
+    entries = []
+    for post in posts:
+        slug = post['slug']
+        item = get_post(slug, section)
+        entries.append(
+            PyRSS2Gen.RSSItem(
+                title = item['title'],
+                link = 'https://thingsima.de/blog/{}'.format(slug),
+                description = item['content'],
+                guid = 'https://thingsima.de/blog/{}'.format(slug),
+                pubDate = datetime.datetime(2003, 9, 6, 12, 00)))
+    rss = PyRSS2Gen.RSS2(
+        title = 'Things I Made',
+        link = 'https://thingsima.de/blog/',
+        description = 'Writing about things I find interesting!',
+        lastBuildDate = datetime.datetime.now(),
+        items = entries)
+    rss.write_xml(open('static/rss.xml', 'w'))
 
 def load_stats(type):
     filepath = 'data/{}.json'.format(type)

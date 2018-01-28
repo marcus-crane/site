@@ -12,6 +12,7 @@ lxml==4.1.1
 MarkupSafe==1.0
 mistune==0.8.3
 mistune-contrib==0.1
+PyRSS2Gen==1.1
 python-dateutil==2.6.1
 pytvdbapi==0.5.0
 requests==2.18.4
