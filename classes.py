@@ -23,10 +23,16 @@ class Book(Media):
 
 class Episode(Media):
 
-    def __init__(self, name, image, link, time, series):
+    def __init__(self, name, image, link, series):
         super().__init__(name, image, link)
-        self.time = time
         self.series = series
+
+    def export(self):
+        episode = {
+            'name': self.name, 'image': self.image,
+            'link': self.link, 'series': self.series
+        }
+        return episode
 
 class Game(Media):
 
@@ -36,7 +42,13 @@ class Game(Media):
 
 class Song(Media):
 
-    def __init__(self, name, image, link, time, artist):
+    def __init__(self, name, image, link, artist):
         super().__init__(name, image, link)
-        self.time = time
         self.artist = artist
+
+    def export(self):
+        song = {
+            'name': self.name, 'image': self.image,
+            'link': self.link, 'artist': self.artist
+        }
+        return song

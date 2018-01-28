@@ -1,4 +1,4 @@
-from classes import Book
+from classes import Book, Episode, Song
 import settings
 
 import mistune
@@ -34,12 +34,28 @@ def get_posts(dir):
 		posts.append(post)
 	return posts
 
+def load_stats(type):
+    filepath = 'data/{}.json'.format(type)
+    with open(filepath) as file:
+        file = file.read()
+        return json.loads(file)
+
+def generate_json(media_type, data):
+    filepath = 'data/{}.json'.format(media_type)
+    if os.path.exists(filepath):
+        os.remove(filepath)
+
+    with open(filepath, 'w') as f:
+        json.dump(data, f, indent=2)
+
+
 def update_books():
     def query_goodreads():
         url = ('https://www.goodreads.com/review/list?'
                'shelf=currently-reading&key={0}&id={1}'
                'v=2'.format(settings.GOODREADS, settings.GOODREADS_ID))
-        r = requests.get(url, headers=settings.USER_AGENT)
+        headers = { 'User-Agent': settings.USER_AGENT }
+        r = requests.get(url, headers=headers)
         return r.text
 
     def fetch_titles(books):
@@ -49,16 +65,100 @@ def update_books():
             image = book[7].text
             link = book[10].text
             author = book[21][0][1].text
-            
+
             entry = Book(name, image, link, author)
             entry = entry.export()
             titles.append(entry)
         return titles
 
-    if os.path.exists('data/books.json'):
-        os.remove('data/books.json')
     data = query_goodreads()
     root = ET.fromstring(data)
-    currently_reading = fetch_titles(root[1])
-    with open('data/books.json', 'w') as f:
-        json.dump(currently_reading, f, indent=2)
+    books = fetch_titles(root[1])
+    generate_json('books', books)
+
+def update_music():
+    def query_lastfm():
+        url = ('http://ws.audioscrobbler.com/2.0/?'
+               'method=user.getrecenttracks'
+               '&user=sentryism&api_key={}'
+               '&format=json&limit=10'.format(settings.LASTFM))
+        headers = { 'User-Agent': settings.USER_AGENT }
+        r = requests.get(url, headers=headers)
+        return r.json()
+
+    def fetch_songs(data):
+        music = []
+        tracks = data['recenttracks']['track']
+        for track in tracks:
+            name = track['name']
+            if not track['image'][3]['#text']:
+                image = '/static/img/no_cover.png'
+            else:
+                image = track['image'][3]['#text']
+            link = track['url']
+            artist = track['artist']['#text']
+            song = Song(name, image, link, artist)
+            song = song.export()
+            music.append(song)
+        return music
+
+    data = query_lastfm()
+    songs = fetch_songs(data)
+    generate_json('music', songs)
+
+def query_trakt(endpoint):
+    headers = { 'Content-Type': 'application/json',
+                'trakt-api-version': '2',
+                'trakt-api-key': settings.TRAKT,
+                'User-Agent': settings.USER_AGENT }
+    url = 'https://api.trakt.tv/users/sentry/history/{}'.format(endpoint)
+    r = requests.get(url, headers=headers)
+    if r.status_code == 200:
+        return r.json()
+
+def fetch_cover(type, tmdb_id, season=None, number=None):
+    if type == 'movie':
+        url = ('https://api.themoviedb.org/3/movie/{}/images'
+               '?api_key={}'.format(tmdb_id, settings.TMDB))
+    if type == 'show':
+        url = ('https://api.themoviedb.org/3/tv/{}/season/{}/episode/{}/images'
+               '?api_key={}'.format(tmdb_id, season, number, settings.TMDB))
+        r = requests.get(url)
+        if r.status_code == 200:
+            data = r.json()
+            if type == 'movie':
+                try:
+                    poster = data['posters'][0]['file_path']
+                    img = 'https://image.tmdb.org/t/p/w780{}'.format(poster)
+                except:
+                    img = '/static/img/no_cover.png'
+            if type == 'show':
+                try:
+                    still = data['stills'][0]['file_path']
+                    img = 'https://image.tmdb.org/t/p/w780{}'.format(still)
+                except:
+                    img = '/static/img/no_still.png'
+            return img
+
+def update_shows():
+    def fetch_shows(data):
+        shows = []
+        for entry in data:
+            tmdb = entry['show']['ids']['tmdb']
+            url = entry['episode']['ids']['imdb']
+            season = entry['episode']['season']
+            number = entry['episode']['number']
+
+            name = entry['episode']['title']
+            image = fetch_cover('show', tmdb, season, number)
+            link = 'http://www.imdb.com/title/{}/'.format(url)
+            series = entry['show']['title']
+
+            episode = Episode(name, image, link, series)
+            episode = episode.export()
+            shows.append(episode)
+        return shows
+
+    data = query_trakt('episodes')
+    shows = fetch_shows(data)
+    generate_json('shows', shows)

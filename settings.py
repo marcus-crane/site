@@ -14,4 +14,4 @@ TMDB = config['keys']['tmdb']
 TRAKT = config['keys']['trakt']
 
 # User agent
-USER_AGENT = { 'User-Agent': 'https://thingsima.de <marcus@thingsima.de>' }
+USER_AGENT = 'https://thingsima.de <marcus@thingsima.de>'
