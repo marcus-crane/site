@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+    web:
+        build: .
+        command: python main.py
+        volumes:
+            - .:/code
+        ports:
+            - "5000:5000"
+
+    rabbitmq:
+        image: rabbitmq:latest
+        ports:
+            - "5672:5672"
+            - "15672:15672"
+
+    celery:
+        build: .
+        command: celery worker -l info -A tasks
+        volumes:
+            - .:/code
+        links:
+            - rabbitmq
+            - web
+        depends_on:
+            - rabbitmq

@@ -1,8 +1,11 @@
-FROM tiangolo/uwsgi-nginx-flask:python3.6
+FROM python:3
 
-COPY requirements.txt /tmp/
+EXPOSE 5000
 
-RUN pip install -U pip
-RUN pip install -r /tmp/requirements.txt
+RUN mkdir /app
+WORKDIR /app
 
-COPY ./app /app
+COPY requirements.txt /app/requirements.txt
+RUN pip install -r requirements.txt
+
+COPY . /app
