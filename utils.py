@@ -1,4 +1,4 @@
-from classes import Book, Episode, Song
+from classes import Book, Episode, Movie, Song
 import settings
 
 import mistune
@@ -58,11 +58,15 @@ def generate_rss(section):
         items = entries)
     rss.write_xml(open('static/rss.xml', 'w'))
 
-def load_stats(type):
+def load_stats(type, limit=None):
     filepath = 'data/{}.json'.format(type)
     with open(filepath) as file:
         file = file.read()
-        return json.loads(file)
+        data = json.loads(file)
+        if limit:
+            return data[0:limit]
+        else:
+            return data
 
 def generate_json(media_type, data):
     filepath = 'data/{}.json'.format(media_type)
@@ -99,6 +103,28 @@ def update_books():
     root = ET.fromstring(data)
     books = fetch_titles(root[1])
     generate_json('books', books)
+
+def update_movies():
+    def fetch_movies(data):
+        movies = []
+        for entry in data:
+            tmdb = entry['movie']['ids']['tmdb']
+            imdb = entry['movie']['ids']['imdb']
+
+            name = entry['movie']['title']
+            image = fetch_cover('movie', tmdb)
+            link = 'http://www.imdb.com/title/{}/'.format(imdb)
+            year = entry['movie']['year']
+
+            movie = Movie(name, image, link, year)
+            movie = movie.export()
+            movies.append(movie)
+        return movies
+
+    data = query_trakt('movies')
+    movies = fetch_movies(data)
+    generate_json('movies', movies)
+
 
 def update_music():
     def query_lastfm():

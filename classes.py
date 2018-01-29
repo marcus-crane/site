@@ -40,6 +40,19 @@ class Game(Media):
         super().__init__(name, image, link)
         self.playtime = playtime
 
+class Movie(Media):
+
+    def __init__(self, name, image, link, year):
+        super().__init__(name, image, link)
+        self.year = year
+
+    def export(self):
+        movie = {
+            'name': self.name, 'image': self.image,
+            'link': self.link, 'year': self.year
+        }
+        return movie
+
 class Song(Media):
 
     def __init__(self, name, image, link, artist):

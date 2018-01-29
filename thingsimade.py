@@ -26,9 +26,10 @@ def contact():
 @app.route('/stats')
 def stats():
     books = load_stats('books')
+    movies = load_stats('movies', 5)
     music = load_stats('music')
-    shows = load_stats('shows')
-    return render_template('stats.html', books=books,
+    shows = load_stats('shows', 5)
+    return render_template('stats.html', books=books, movies=movies,
         music=music, shows=shows)
 
 if __name__ == '__main__':
