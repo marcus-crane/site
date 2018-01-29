@@ -27,7 +27,7 @@ def contact():
 def stats():
     books = load_stats('books')
     movies = load_stats('movies', 5)
-    music = load_stats('music')
+    music = load_stats('music', 5)
     shows = load_stats('shows', 5)
     return render_template('stats.html', books=books, movies=movies,
         music=music, shows=shows)
