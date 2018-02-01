@@ -54,37 +54,6 @@ def update_movies():
     movies = fetch_movies(data)
     generate_json('movies', movies)
 
-
-def update_music():
-    def query_lastfm():
-        url = ('http://ws.audioscrobbler.com/2.0/?'
-               'method=user.getrecenttracks'
-               '&user=sentryism&api_key={}'
-               '&format=json&limit=10'.format(settings.LASTFM))
-        headers = { 'User-Agent': settings.USER_AGENT }
-        r = requests.get(url, headers=headers)
-        return r.json()
-
-    def fetch_songs(data):
-        music = []
-        tracks = data['recenttracks']['track']
-        for track in tracks:
-            name = track['name']
-            if not track['image'][3]['#text']:
-                image = '/static/img/no_cover.png'
-            else:
-                image = track['image'][3]['#text']
-            link = track['url']
-            artist = track['artist']['#text']
-            song = Song(name, image, link, artist)
-            song = song.export()
-            music.append(song)
-        return music
-
-    data = query_lastfm()
-    songs = fetch_songs(data)
-    generate_json('music', songs)
-
 def query_trakt(endpoint):
     headers = { 'Content-Type': 'application/json',
                 'trakt-api-version': '2',
