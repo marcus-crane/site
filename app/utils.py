@@ -1,3 +1,4 @@
+import couchdb
 import mistune
 import mistune_contrib.meta as meta
 import PyRSS2Gen
@@ -50,3 +51,16 @@ def generate_rss(section):
         lastBuildDate = datetime.datetime.now(),
         items = entries)
     rss.write_xml(open('static/rss.xml', 'w'))
+
+def load_stats(type, limit=None):
+    couch = couchdb.Server()
+    media = couch[type]
+    items = []
+
+    for item in media:
+        items.append(media[item])
+
+    if limit:
+        return items[:limit]
+    else:
+        return items
