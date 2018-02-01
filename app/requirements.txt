@@ -1,0 +1,10 @@
+click==6.7
+CouchDB==1.1
+Flask==0.12.2
+itsdangerous==0.24
+Jinja2==2.10
+MarkupSafe==1.0
+mistune==0.8.3
+mistune-contrib==0.1
+PyRSS2Gen==1.1
+Werkzeug==0.14.1
