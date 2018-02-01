@@ -2,6 +2,6 @@ __pycache__
 .DS_Store
 keys.ini
 env/
-*.json
+*.db
 *.pyc
 static/rss.xml

@@ -14,7 +14,7 @@ def query_service(url, headers={}):
     r = requests.get(url, headers=headers)
     return r.text
 
-def film_covers(tmdb_id):
+def film_covers(tmdb):
     url = ('https://api.themoviedb.org/3/movie/{}/images'
            '?api_key={}'.format(tmdb_id, settings.TMDB))
     headers = { 'User-Agent': settings.USER_AGENT }
@@ -28,7 +28,7 @@ def film_covers(tmdb_id):
 
     return img
 
-def show_covers(tmdb_id, season, number, series):
+def show_covers(season, number, series):
     db = api.TVDB(settings.TVDB)
     result = db.search(series, 'en')
     try:

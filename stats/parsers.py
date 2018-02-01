@@ -52,15 +52,15 @@ def trakt_shows(data):
     data = json.loads(data)
     shows = []
     for item in data:
-        tmdb = item['show']['ids']['tmdb']
-        url = item['episode']['ids']['imdb']
+        slug = item['show']['ids']['slug']
         season = item['episode']['season']
         number = item['episode']['number']
 
         name = item['episode']['title']
         series = item['show']['title']
-        image = sources.show_covers(tmdb, season, number, series)
-        link = 'http://www.imdb.com/title/{}/'.format(url)
+        image = sources.show_covers(season, number, series)
+        link = ('https://trakt.tv/shows/{}/seasons/{}/'
+                'episodes/{}'.format(slug, season, number))
 
         show = { 'name': name, 'image': image,
                  'link': link, 'series': series }
