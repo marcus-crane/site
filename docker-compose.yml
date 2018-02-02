@@ -1,7 +1,15 @@
 version: '3'
 services:
-  web:
-    container_name: 'site'
-    build: ./site
-    ports:
-     - "5000:5000"
+    web:
+        build: site/.
+        ports:
+            - "5000:5000"
+
+    worker:
+        build: worker/.
+    
+    rabbitmq:
+        image: rabbitmq
+
+    couchdb:
+        image: couchdb
