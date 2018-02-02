@@ -9,6 +9,7 @@ services:
 
     worker:
         build: worker/.
+        command: celery -A tasks worker --beat --loglevel=info
         depends_on:
             - "rabbitmq"
             - "couchdb"
@@ -18,3 +19,5 @@ services:
 
     couchdb:
         image: couchdb
+        logging:
+            driver: none
