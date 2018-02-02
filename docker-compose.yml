@@ -4,9 +4,14 @@ services:
         build: site/.
         ports:
             - "5000:5000"
+        depends_on:
+            - "couchdb"
 
     worker:
         build: worker/.
+        depends_on:
+            - "rabbitmq"
+            - "couchdb"
     
     rabbitmq:
         image: rabbitmq

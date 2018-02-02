@@ -53,7 +53,7 @@ def generate_rss(section):
     rss.write_xml(open('static/rss.xml', 'w'))
 
 def load_stats(type, limit=None):
-    couch = couchdb.Server()
+    couch = couchdb.Server('http://couchdb:5984/')
     media = couch[type]
     items = []
 

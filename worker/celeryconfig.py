@@ -1,6 +1,6 @@
 from celery.schedules import crontab
 
-BROKER_URL = 'amqp://guest@localhost:5672//'
+BROKER_URL = 'amqp://guest@rabbitmq:5672//'
 
 CELERYBEAT_SCHEDULE = {
     'update_books': {

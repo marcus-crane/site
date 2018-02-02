@@ -2,7 +2,7 @@ import couchdb
 
 class Database():
     def __init__(self):
-        self.couch = couchdb.Server()
+        self.couch = couchdb.Server('http://couchdb:5984')
 
     def insert(self, table, item):
         db = self.couch[table]
