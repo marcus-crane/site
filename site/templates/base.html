@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='tachyons.min.css') }}">
+</head>
+<body>
+	<nav class="db dt-ns mw9 center w-100">
+		<div class="pa3 pl3 db dtc-ns v-mid tl w-50">
+			<a class="link hover-hot-pink b f6 f5-ns dib">{% block nav %}{% endblock %}</a>
+		</div>
+		<div class="pa3-ns pl3 pr3 pb3 pr3 db dtc-ns v-mid w-100 tl tr-ns mt2-ns mt0">
+			<a class="f6 fw6 hover-blue link mr2 dib" href="/" title="right back to the start">{% block home %}home{% endblock %}</a>
+			<a class="f6 fw6 hover-blue link mr2 dib" href="/blog" title="words and letters">{% block blog %}blog{% endblock %}</a>
+			<a class="f6 fw6 hover-blue link mr2 dib" href="/stats" title="104% accurate">{% block stats %}stats{% endblock %}</a>
+			<a class="f6 fw6 hover-blue link mr2 dib" href="/contact" title="get in touch!">{% block contact %}contact{% endblock %}</a>
+		</div>
+	</nav>
+	<section class="pa3 bt b--black-10 black-70">
+		{% block content %}
+		{% endblock %}
+	</section>
+</body>
+</html>

@@ -1,41 +1,15 @@
 version: '3'
-
 services:
-    db:
-        image: postgres
-        hostname: db
-        environment:
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=postgres
-            - POSTGRES_DB=postgres
-        ports:
-            - "5432:5432"
-
-    rabbit:
-        image: rabbitmq
-        hostname: rabbitmq
-
     web:
-        build: .     
-        command: ./run_web.sh
-        hostname: web
-        volumes:
-            - .:/app
+        build: site/.
         ports:
-            - "8000:8000"
-        links:
-            - db
-            - rabbit
-        depends_on:
-            - db
+            - "5000:5000"
 
     worker:
-        build: .
-        command: ./run_celery.sh
-        volumes:
-            - .:/app
-        links:
-            - db
-            - rabbit
-        depends_on:
-            - rabbit
+        build: worker/.
+    
+    rabbitmq:
+        image: rabbitmq
+
+    couchdb:
+        image: couchdb

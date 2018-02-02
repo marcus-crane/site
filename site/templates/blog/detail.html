@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }} | utf9k{% endblock %}
+
+{% block nav %}utf9k{% endblock %}
+{% block blog %}[ blog ]{% endblock %}
+
+{% block content %}
+  <article class="cf ph3 ph6-m ph7-l pv4">
+    <header class="mb2">
+      <h1 class="f2 fw9 mb1 mt0">
+        {{ post.title }}
+      </h1>
+      <time class="f6 ttu tracked gray">
+        {{ post.date }}
+      </time>
+    </header>
+    <div class="fn f6 fl-ns" id="content">
+      {{ post.content|safe }}
+    </div>
+  </article>
+{% endblock %}
