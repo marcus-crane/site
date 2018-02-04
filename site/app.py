@@ -3,7 +3,7 @@ from flask import Flask, render_template
 import json
 from utils import get_post, get_posts, load_stats
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 
 @app.route('/')
 def index():
