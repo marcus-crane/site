@@ -1,5 +1,6 @@
 Title: arch on an intel nuc
 Date: December 24, 2017
+SFW: True
 
 It's that time again where I decide to reinstall Arch Linux and likely end up bashing my head against a wall. I have an old blog post on my Github but it could be better so this is an extended version mainly for my own future reference.
 

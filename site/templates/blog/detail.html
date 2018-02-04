@@ -8,10 +8,10 @@
 {% block content %}
   <article class="cf ph3 ph6-m ph7-l pv4">
     <header class="mb2">
-      <h1 class="f2 fw9 mb1 mt0">
-        {{ post.title }}
+      <h1 class="f2 fw9 mb1 mt0 dib">
+        {{ post.title }} {% if post.sfw != "True" %}<p class="f7 ttu dib red mt0 mb0">[nsfw]</p>{% endif %}
       </h1>
-      <time class="f6 ttu tracked gray">
+      <time class="f6 ttu tracked gray db">
         {{ post.date }}
       </time>
     </header>

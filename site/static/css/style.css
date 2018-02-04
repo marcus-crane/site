@@ -48,6 +48,11 @@ article #pager { flex: 1; }
   font-weight: 600;
 }
 
+#content p {
+    font-size: 18px;
+    line-height: 1.4;
+}
+
 .codehilite {
   border-radius: 3px;
   overflow: auto;

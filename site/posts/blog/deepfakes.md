@@ -1,9 +1,8 @@
 Title: deepfakes
 Date: January 30, 2017
+SFW: False
 
-**While I believe this subject is important, do note that it is NSFW as the technology/community discussed are tightly tied to pornography**
-
-## An overview
+# An overview
 
 Just under a week ago, an article from The Verge titled [Fake celebrity porn is blowing up on Reddit, thanks to artificial intelligence](https://www.theverge.com/2018/1/24/16929148/fake-celebrity-porn-ai-deepfake-face-swapping-artificial-intelligence-reddit) was posted on [Hacker News](https://news.ycombinator.com/item?id=16226495). If you'd just glimpsed the headline, you might assume it's a bunch of shitstirrers up to no good with Photoshop but unfortunately, it's arguably worse.
 
@@ -13,7 +12,7 @@ It isn't exactly hard to see where this can go wrong but after discussing this t
 
 Given my feelings of "Oh fuck", this is my attempt at rounding up both my own thoughts and those pitches in various discussion threads I've seen because there's all sorts of ways this can go wrong. Before we begin, I should explain a bit more about this technology and how it works. This isn't a master class on machine learning by any means. It's designed to be ["as simple as possible, but not simpler"](https://quoteinvestigator.com/2011/05/13/einstein-simple/), mainly because my understanding of the concepts involved is surface level at best. For anything deeper, you should seek out other sources.
 
-## What are deepfakes and how are they made?
+# What are deepfakes and how are they made?
 
 [deepfakes](https://reddit.com/u/deepfakes) is the name of a user on reddit who "pioneered" this new wave of computer-generated celebrity pornography. To further promote discussion, and share the generated works, a subreddit called [/r/deepfakes](https://reddit.com/r/deepfakes) was created in his name. The term *deepfake* has since been coined to refer to the creations that followed and it's the term I'll be using going forward.
 
