@@ -13,7 +13,7 @@ def get_post(filename, dir):
         post['title'] = data[0]['Title']
         post['date'] = data[0]['Date']
         post['sfw'] = data[0]['SFW']
-        post['content'] = mistune.markdown(data[1])
+        post['content'] = mistune.markdown(data[1], escape=False)
         return post
 
     with open('posts/{}/{}.md'.format(dir, filename), 'r') as file:
