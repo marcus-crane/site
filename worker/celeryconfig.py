@@ -9,7 +9,7 @@ CELERYBEAT_SCHEDULE = {
     },
     'update_movies': {
         'task': 'tasks.update_movies',
-        'schedule': crontab(hour='*/4')
+        'schedule': crontab(hour='*/3')
     },
     'update_music': {
         'task': 'tasks.update_music',
