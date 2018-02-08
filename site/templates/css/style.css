@@ -68,7 +68,12 @@ code {
   padding: 2px;
 }
 
-/* Tables (nicked from ()) */
+/* Stats grid */
+.gridcalc {
+  width: calc(100%/6);
+}
+
+/* Tables */
 
 table {
   border-collapse: collapse;

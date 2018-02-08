@@ -22,7 +22,7 @@
     <h2 class="f4 fw6">🎬 movies://last_watched</h2>
     <div class="cf pa2">
       {% for movie in movies %}
-      <div class="fl w-50 w-25-m w-20-l pa2">
+      <div class="fl w-50 w-25-m gridcalc pa2">
         <a href="{{ movie.link }}" target="_blank" rel="noopener noreferrer" class="link overflow-hidden hide-child">
           <img src="{{ movie.image }}" width="500px" class="w-100 db outline black-10">
           <dl class="mt2 f6 lh-copy">
@@ -37,7 +37,7 @@
       <h2 class="f4 fw6">🎵 music://last_heard</h2>
       <div class="cf pa2">
           {% for song in music %}
-          <div class="fl w-50 w-25-m w-20-l pa2">
+          <div class="fl w-50 w-25-m gridcalc pa2">
             <a href="{{ song.link }}" target="_blank" rel="noopener noreferrer" class="db link dim tc">
               <img src="{{ song.image }}" width="300px" class="w-100 db outline black-10"/>
               <dl class="mt2 f6 lh-copy">
@@ -49,29 +49,11 @@
           {% endfor %}
       </div>
   </article>
-  <!-- <article>
-      <h2 class="f4 fw6">🕹 steam://last_2_weeks</h2>
-      <div class="cf pa2">
-          {% for game in games %}
-          <div class="fl w-50 w-25-m w-20-l pa2">
-            <a href="{{ game.link }}" target="_blank" rel="noopener noreferrer" class="db link dim tc">
-              <img src="{{ game.image }}" class="w-100 db outline black-10"/>
-              <dl class="mt2 f6 lh-copy">
-                <dd class="ml0 black truncate w-100">{{ game.name }}</dd>
-                <dd class="ml0 gray truncate w-100">{{ game.playtime }}</dd>
-              </dl>
-            </a>
-          </div>
-          {% else %}
-          <h2>I haven't played any steam games in the last 2 weeks :(</h2>
-          {% endfor %}
-      </div>
-  </article> -->
   <article>
       <h2 class="f4 fw6">📺 tv://last_watched</h2>
       <div class="cf pa2">
           {% for show in shows %}
-          <div class="fl w-50 w-25-m w-20-l pa2">
+          <div class="fl w-50 w-25-m gridcalc pa2">
             <a href="{{ show.link }}" target="_blank" rel="noopener noreferrer" class="db link dim tc">
               <img src="{{ show.image }}" height="143px" width="256px" class="w-100 db outline black-10"/>
               <dl class="mt2 f6 lh-copy">
