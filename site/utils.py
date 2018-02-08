@@ -3,7 +3,7 @@ import mistune
 import mistune_contrib.meta as meta
 import PyRSS2Gen
 
-import datetime
+from datetime import datetime
 import os
 
 
@@ -43,12 +43,14 @@ def generate_rss(section):
                 link='https://thingsima.de/blog/{}'.format(slug),
                 description=item['content'],
                 guid='https://thingsima.de/blog/{}'.format(slug),
-                pubDate=datetime.datetime(2003, 9, 6, 12, 00)))
+                pubDate=datetime.strptime(item['date'], '%B %d, %Y')
+            )
+        )
     rss = PyRSS2Gen.RSS2(
         title='Things I Made',
         link='https://thingsima.de/blog/',
         description='Writing about things I find interesting!',
-        lastBuildDate=datetime.datetime.now(),
+        lastBuildDate=datetime.now(),
         items=entries)
     rss.write_xml(open('static/rss.xml', 'w'))
 
