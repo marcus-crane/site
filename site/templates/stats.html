@@ -22,7 +22,7 @@
     <h2 class="f4 fw6">🎬 movies://last_watched</h2>
     <div class="cf pa2">
       {% for movie in movies %}
-      <div class="fl w-50 w-33-m gridcalc pa2">
+      <div class="fl w-50 w-33-m w-sixth-l pa2">
         <a href="{{ movie.link }}" target="_blank" rel="noopener noreferrer" class="link overflow-hidden hide-child">
           <img src="{{ movie.image }}" width="500px" class="w-100 db outline black-10">
           <dl class="mt2 f6 lh-copy">
@@ -37,7 +37,7 @@
       <h2 class="f4 fw6">🎵 music://last_heard</h2>
       <div class="cf pa2">
           {% for song in music %}
-          <div class="fl w-50 w-33-m gridcalc pa2">
+          <div class="fl w-50 w-33-m w-sixth-l pa2">
             <a href="{{ song.link }}" target="_blank" rel="noopener noreferrer" class="db link dim tc">
               <img src="{{ song.image }}" width="300px" class="w-100 db outline black-10"/>
               <dl class="mt2 f6 lh-copy">
@@ -53,7 +53,7 @@
       <h2 class="f4 fw6">📺 tv://last_watched</h2>
       <div class="cf pa2">
           {% for show in shows %}
-          <div class="fl w-50 w-33-m gridcalc pa2">
+          <div class="fl w-50 w-33-m w-sixth-l pa2">
             <a href="{{ show.link }}" target="_blank" rel="noopener noreferrer" class="db link dim tc">
               <img src="{{ show.image }}" height="143px" width="256px" class="w-100 db outline black-10"/>
               <dl class="mt2 f6 lh-copy">
