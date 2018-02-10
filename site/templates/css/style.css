@@ -49,26 +49,20 @@ article #pager { flex: 1; }
 }
 
 #content p {
-    font-size: 18px;
-    line-height: 1.4;
-}
-
-.codehilite {
-  border-radius: 3px;
-  overflow: auto;
-}
-
-pre, .codehilite span, code, table, td, th {
-  font-family: Menlo, Consolas, monospace;
-  font-size: 90%;
+  font-size: 18px;
+  line-height: 1.4;
 }
 
 code {
-  border-radius: 2px;
-  padding: 2px;
+  color: #F99157;
+  font-size: 85%;
 }
 
-/* Stats grid */
+thead tr th, tbody tr td, tbody tr td a {
+  font-family: monospace;
+}
+
+/* Stats grid 
 .gridcalc {
   width: calc(100%/6);
 }
