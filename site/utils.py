@@ -1,16 +1,44 @@
 import couchdb
 import mistune
+from pygments import highlight
+from pygments.lexers import get_lexer_by_name
+from pygments.formatters import html
 import mistune_contrib.meta as meta
 import PyRSS2Gen
 
 from datetime import datetime
+import re
 import os
 
+class PostRenderer(mistune.Renderer):
+    def block_code(self, code, lang):
+        if not lang:
+            return '\n<pre><code>{}</code></pre>\n'.format(mistune.escape(code))
+        lexer = get_lexer_by_name(lang, stripall=True)
+        formatter = html.HtmlFormatter()
+        return highlight(code, lexer, formatter)
+
+    def block_quote(self, text):
+        # Hideous code -> swap text split for just regex and clean up
+        contents = text.split('<br>\n[')
+        quote = re.compile("<p>(.|[\n])*\[").match(text).group(0)[:-1]
+        author = contents[1].split(']</p>\n')[0]
+        return '''
+        <blockquote class="athelas ml0 mt0 pl4 black-90 bl bw2 b--blue">
+            <p class="f5 f4-m f3-l lh-copy measure mt0">
+                {0}
+            </p>
+            <cite class="f6 ttu tracked fs-normal">― {1}</cite>
+        </blockquote>
+        '''.format(quote, author)
+
+renderer = PostRenderer(escape=True, hard_wrap=True)
+markdown = mistune.Markdown(renderer=renderer)
 
 def get_post(filename, directory):
     def render_md(post_file):
         data = meta.parse(post_file)
-        content = mistune.markdown(data[1], escape=False)
+        content = markdown(data[1])
         post_data = dict(title=data[0]['Title'], date=data[0]['Date'],
                          sfw=data[0]['SFW'], content=content)
         return post_data
