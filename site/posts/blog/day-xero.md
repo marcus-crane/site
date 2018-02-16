@@ -33,4 +33,4 @@ As someone else once told me:
 
 > Adults are just kids who got older
 
-EDIT: This post was rushed and not planned out at all but I'll be posting it as is for historical reasons
+*EDIT: This post was rushed and not planned out at all but I'll be posting it as is for historical reasons*
