@@ -23,10 +23,14 @@ This post isn't actually about anything as you can tell. It's the [Seinfeld](htt
 
 I'm sure if I look back at today, I'll wonder what I was even worried about. If you think about friends or coworkers, do you even really remember meeting them? It's like as soon as you properly know someone, you just kinda forget any awkward moments before your first interaction. I suppose it's like that with jobs. You just kinda turn up one day and, assuming you try your best, you just kinda slot in nicely as if you'd been there the whole time.
 
-Anyway, I better deploy this thing before my taxi gets here. It's still kinda crazy to me that I can just give away [the actual post file](https://github.com/marcus-crane/site/blob/master/site/posts/blog/day-xero.com) you're reading with a few entries into a terminal. Yes, I had to manually make that link because this post even in the repo yet! That's like some kinda preemptive sharing, whoaaa mannnnn.
+Anyway, I better deploy this thing before my taxi gets here. It's still kinda crazy to me that I can just give away [the actual post file](https://github.com/marcus-crane/site/blob/master/site/posts/blog/day-xero.md) you're reading with a few entries into a terminal. Yes, I had to manually make that link because this post even in the repo yet! That's like some kinda preemptive sharing, whoaaa mannnnn.
 
 As someone who learnt piece by piece, pouring a bunch of hours into Right Click -> View Page Source, it's nice to give my own stuff back. I can't remember who said it or when but someone once said something along the lines of "I don't write code, I merely borrow it." Their point wasn't that they spend all day on Stack Overflow but rather that none of their ideas are truly original. Nothing is original because it's all inspired by things that came before.
 
-Ok, ok, my time is actually almost up and while I'm a bit freaked out that I'll be diving into my first full time software job after years of being a hobbyist, there's one thing that I try to remind myself. I might not truly know what I'm but neither does anyone else or as someone else once told me:
+Ok, ok, my time is actually almost up and while I'm a bit freaked out that I'll be diving into my first full time software job after years of being a hobbyist, there's one thing that I try to remind myself. I might not truly know what I'm doing but neither does anyone else.
+
+As someone else once told me:
 
 > Adults are just kids who got older
+
+EDIT: This post was rushed and not planned out at all but I'll be posting it as is for historical reasons

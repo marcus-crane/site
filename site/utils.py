@@ -18,19 +18,51 @@ class PostRenderer(mistune.Renderer):
         formatter = html.HtmlFormatter()
         return highlight(code, lexer, formatter)
 
+    def pull_attribution(self, lines):
+        print(lines)
+        quote = {}
+        # Cuts out the starting <p> tag
+        if '~' in lines[-1:][0]:
+            # Selects between the ~ and the left over </p> tag
+            quote['author'] = lines[-1:][0][2:-4]
+        else:
+            quote['author'] = None
+        if quote['author'] is None:
+            quote['text'] = '\n'.join(lines)[3:-4]
+        else:
+            quote['text'] = '\n'.join(lines[:-1])[3:]
+        return quote
+
     def block_quote(self, text):
         # Hideous code -> swap text split for just regex and clean up
-        contents = text.split('<br>\n[')
-        quote = re.compile("<p>(.|[\n])*\[").match(text).group(0)[:-1]
-        author = contents[1].split(']</p>\n')[0]
-        return '''
+        contents = text.split('\n')[:-1]
+        quote = self.pull_attribution(contents)
+        html = self.build_quote(quote)
+        return html
+
+    def build_quote(self, quote):
+        html = ''
+        text_html = '''
+        <p class="f5 f4-m f3-l lh-copy measure mt0">
+            {}
+        </p>
+        '''.format(quote['text'])
+        html = html + text_html
+
+        if quote['author'] is not None:
+            author_html = '''
+            <cite class="f6 ttu tracked fs-normal">
+                ― {}
+            </cite>
+            '''.format(quote['author'])
+            html = html + author_html
+
+        blockquote = '''
         <blockquote class="athelas ml0 mt0 pl4 black-90 bl bw2 b--blue">
-            <p class="f5 f4-m f3-l lh-copy measure mt0">
-                {0}
-            </p>
-            <cite class="f6 ttu tracked fs-normal">― {1}</cite>
+            {}
         </blockquote>
-        '''.format(quote, author)
+        '''.format(html)
+        return blockquote
 
 renderer = PostRenderer(escape=True, hard_wrap=True)
 markdown = mistune.Markdown(renderer=renderer)
