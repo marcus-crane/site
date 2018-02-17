@@ -1,4 +1,4 @@
-Title: deepfakes
+Title: Deepfakes is kinda scary
 Date: February 5, 2018
 SFW: False
 

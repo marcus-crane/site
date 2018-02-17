@@ -1,4 +1,4 @@
-Title: thoughts about running a wiki
+Title: Some thoughts about running a wiki
 Date: December 18, 2017
 SFW: True
 

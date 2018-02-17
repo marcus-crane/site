@@ -1,4 +1,4 @@
-Title: arch on an intel nuc
+Title: Installing Arch Linux on my Intel NUC
 Date: December 24, 2017
 SFW: True
 

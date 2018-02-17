@@ -12,10 +12,13 @@
     {% for post in items %}
     <dl class="f6 lh-title mv2">
     	<dt class="dib ml0 gray">{{ post.date }}</dt>
-    	<dd class="dib">
-    		<a class="b link" href="{{ post.slug }}">
+    	<dd class="dib red">
+    		<a class="b link" href="{{ year }}/{{ post.slug }}">
     			{{ post.title }}
     		</a>
+    		{% if not post.sfw %}
+    		nsfw
+    		{% endif %}
     	</dd>
     </dl>
     {% endfor %}

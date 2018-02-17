@@ -67,7 +67,7 @@ class PostRenderer(mistune.Renderer):
 renderer = PostRenderer(escape=True, hard_wrap=True)
 markdown = mistune.Markdown(renderer=renderer)
 
-def get_post(filename, directory):
+def get_post(slug, dir, year):
     def render_md(post_file):
         data = meta.parse(post_file)
         content = markdown(data[1])
@@ -75,7 +75,12 @@ def get_post(filename, directory):
                          sfw=data[0]['SFW'], content=content)
         return post_data
 
-    with open('posts/{}/{}.md'.format(directory, filename), 'r') as file:
+    year_group = os.listdir('posts/{0}/{1}'.format(dir, year))
+    file = [post for post in year_group if slug in post]
+
+    location = 'posts/{0}/{1}/{2}'.format(dir, year, file[0])
+    print(year, file, location)
+    with open(location, 'r') as file:
         post = file.read()
         return render_md(post)
 
@@ -92,11 +97,15 @@ def get_posts(dir):
     posts.sort()
     post_list = []
     for entry in posts:
-        post = {}
+        if '*' not in entry:
+            sfw = True
+        else:
+            sfw = False
+            entry = entry[:-1]
         date = entry[0:10]
         slug = entry[11:]
         title = slug.replace('-', ' ')
-        post = { 'date': date, 'slug': slug, 'title': title }
+        post = { 'date': date, 'slug': slug, 'title': title, 'sfw': sfw }
         post_list.append(post)
     grouped_posts = order_posts_by_year(post_list)
     return grouped_posts
