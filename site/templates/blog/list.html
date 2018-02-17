@@ -7,10 +7,18 @@
 
 {% block content %}
 <section class="pa3 pa4-m pa5-l">
-  {% for post in posts %}
-    <a class="f3 link b no-underline black dib ph2 pv1 {{ loop.cycle('hover-dark-blue', 'hover-blue', 'hover-light-blue', 'hover-green', 'hover-light-green', 'hover-yellow', 'hover-gold', 'hover-orange', 'hover-light-red', 'hover-red', 'hover-hot-pink', 'hover-pink', 'hover-light-purple', 'hover-purple') }}" href="/blog/{{ post.slug }}">
-      {{ post.title }}
-    </a> //
+  {% for year, items in posts.items() %}
+    <h4 class="f6 fw6">{{ year }}</h4>
+    {% for post in items %}
+    <dl class="f6 lh-title mv2">
+    	<dt class="dib ml0 gray">{{ post.date }}</dt>
+    	<dd class="dib">
+    		<a class="b link" href="{{ post.slug }}">
+    			{{ post.title }}
+    		</a>
+    	</dd>
+    </dl>
+    {% endfor %}
   {% else %}
     <b class="db f4 mb1">No posts have been written yet!</b>
   {% endfor %}

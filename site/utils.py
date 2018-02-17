@@ -6,7 +6,7 @@ from pygments.formatters import html
 import mistune_contrib.meta as meta
 import PyRSS2Gen
 
-from datetime import datetime
+import datetime
 import re
 import os
 
@@ -80,16 +80,41 @@ def get_post(filename, directory):
         return render_md(post)
 
 
-def get_posts(directory):
-    path = os.listdir('posts/{}'.format(directory))
+def get_posts(dir):
     posts = []
-    # Remove the '.md' bit from the end of each file
-    urls = [post[:-3] for post in path]
-    for url in urls:
-        post = {'title': url.replace('-', ' '), 'slug': url}
-        posts.append(post)
-    return posts
+    for year in os.listdir('posts/{}'.format(dir)):
+        if year == '.DS_Store':
+            pass
+        else:
+            for post in os.listdir('posts/{}/{}'.format(dir, year)):
+                posts.append(post[:-3])
+    # Posts are now in reverse chronological order
+    posts.sort()
+    post_list = []
+    for entry in posts:
+        post = {}
+        date = entry[0:10]
+        slug = entry[11:]
+        title = slug.replace('-', ' ')
+        post = { 'date': date, 'slug': slug, 'title': title }
+        post_list.append(post)
+    grouped_posts = order_posts_by_year(post_list)
+    return grouped_posts
 
+def order_posts_by_year(post_list):
+    years = [item['date'][:4] for item in post_list]
+    unique_years = sorted(set(years), reverse=True)
+    grouped_posts = {}
+    for year in unique_years:
+        grouped_posts[year] = []
+        for post in post_list:
+            if year in post['date']:
+                d = datetime.date(int(post['date'][0:4]),
+                                  int(post['date'][6:7]),
+                                  int(post['date'][9:10]))
+                post['date'] = d.strftime('%b %d')
+                grouped_posts[year].append(post)
+    return grouped_posts
 
 def generate_rss(section):
     posts = get_posts(section)
