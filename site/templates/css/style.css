@@ -1,6 +1,8 @@
 /* Globals */
 
-h1, h2, h3, h4, h5, h6, p, a, b, dd, time, input, small, label, legend, textarea, input, button {
+h1, h2, h3, h4, h5, h6, p, a, b, dd, dl, dt, 
+time, input, small, label, legend, textarea,
+input, button {
   color: #000;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1em;
@@ -62,54 +64,49 @@ thead tr th, tbody tr td, tbody tr td a {
   font-family: monospace;
 }
 
-/* Stats grid 
-.gridcalc {
-  width: calc(100%/6);
-}
-
 /* Tables */
 
 table {
   border-collapse: collapse;
   padding: 0;
   width: 100%;
-  color: #D8DEE9; }
-  table tr {
-    background-color: #1B2B34;
-    margin: 0;
-    padding: 0; }
-    table tr:nth-child(2n) {
-      background-color: #1B2B34; }
-    table tr th {
-      font-weight: bold;
-      text-align: left;
-      margin: 0;
-      padding: 6px 13px; }
-    table tr td {
-      text-align: left;
-      margin: 0;
-      padding: 6px 13px; }
-    table tr th :first-child, table tr td :first-child {
-      margin-top: 0; }
-    table tr th :last-child, table tr td :last-child {
-      margin-bottom: 0; }
-    table tr a {
-      color: #D8DEE9;
-    }
-
-/* Contact */
-.online {
-  border-width: .30rem;
-  background-color: rgba(18, 156, 210, 0.9);
-  padding: 0;
+  color: #D8DEE9; 
 }
 
-.ingame {
-  border-width: .30rem;
-  background-color: rgba(19, 167, 112, 0.8);
-  padding: 0;
+table tr {
+  background-color: #1B2B34;
+  margin: 0;
+  padding: 0; 
 }
 
+table tr:nth-child(2n) {
+  background-color: #1B2B34;
+}
+
+table tr th {
+  font-weight: bold;
+  text-align: left;
+  margin: 0;
+  padding: 6px 13px;
+}
+
+table tr td {
+  text-align: left;
+  margin: 0;
+  padding: 6px 13px;
+}
+
+table tr th :first-child, table tr td :first-child {
+  margin-top: 0;
+}
+
+table tr th :last-child, table tr td :last-child {
+  margin-bottom: 0;
+}
+
+table tr a {
+  color: #D8DEE9;
+}
 h1 a {
   text-decoration: none;
 }

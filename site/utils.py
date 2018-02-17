@@ -94,7 +94,7 @@ def get_posts(dir):
             for post in os.listdir('posts/{}/{}'.format(dir, year)):
                 posts.append(post[:-3])
     # Posts are now in reverse chronological order
-    posts.sort()
+    posts.sort(reverse=True)
     post_list = []
     for entry in posts:
         if '*' not in entry:
@@ -118,9 +118,9 @@ def order_posts_by_year(post_list):
         grouped_posts[year] = []
         for post in post_list:
             if year in post['date']:
-                d = datetime.date(int(post['date'][0:4]),
-                                  int(post['date'][6:7]),
-                                  int(post['date'][9:10]))
+                d = post['date'].split('-')
+                d = [int(d) for d in d]
+                d = datetime.date(d[0], d[1], d[2])
                 post['date'] = d.strftime('%b %d')
                 grouped_posts[year].append(post)
     return grouped_posts
