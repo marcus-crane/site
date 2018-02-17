@@ -84,20 +84,30 @@ def get_post(slug, dir, year):
         post = file.read()
         return render_md(post)
 
+def get_post_archive(dir, year):
+    try:
+        posts = get_posts(dir, year)
+    except:
+        raise
 
-def get_posts(dir):
+
+def get_posts(dir, year=None):
     posts = []
-    for year in os.listdir('posts/{}'.format(dir)):
-        if year == '.DS_Store':
-            pass
-        else:
+    # Super hacky, violates DRY and is going to be rewritten (I mean it!)
+    if year is None:
+        for year in os.listdir('posts/{}'.format(dir)):
+            if '.DS_Store' is not year:
+                for post in os.listdir('posts/{}/{}'.format(dir, year)):
+                    posts.append(post[:-3])
+    else:
+        for post in os.listdir('posts/{}/{}'.format(dir, year)):
             for post in os.listdir('posts/{}/{}'.format(dir, year)):
                 posts.append(post[:-3])
     # Posts are now in reverse chronological order
     posts.sort(reverse=True)
     post_list = []
     for entry in posts:
-        if '*' not in entry:
+        if '#' not in entry:
             sfw = True
         else:
             sfw = False
