@@ -138,23 +138,27 @@ def order_posts_by_year(post_list):
 def generate_rss(section):
     posts = get_posts(section)
     entries = []
-    for post in posts:
-        slug = post['slug']
-        item = get_post(slug, section)
-        entries.append(
-            PyRSS2Gen.RSSItem(
-                title=item['title'],
-                link='https://thingsima.de/blog/{}'.format(slug),
-                description=item['content'],
-                guid='https://thingsima.de/blog/{}'.format(slug),
-                pubDate=datetime.strptime(item['date'], '%B %d, %Y')
+    for year in posts:
+        for post in posts[year]:
+            print(post)
+            slug = post["slug"]
+            item = get_post(slug, section, year)
+            entries.append(
+                PyRSS2Gen.RSSItem(
+                    title=item['title'],
+                    link='https://thingsima.de/blog/{}'.format(slug),
+                    description=item['content'],
+                    guid='https://thingsima.de/blog/{}'.format(slug),
+                    pubDate=datetime.datetime.strptime(
+                        item['date'], '%B %d, %Y'
+                    )
+                )
             )
-        )
     rss = PyRSS2Gen.RSS2(
         title='Things I Made',
         link='https://thingsima.de/blog/',
         description='Writing about things I find interesting!',
-        lastBuildDate=datetime.now(),
+        lastBuildDate=datetime.datetime.now(),
         items=entries)
     rss.write_xml(open('static/rss.xml', 'w'))
 

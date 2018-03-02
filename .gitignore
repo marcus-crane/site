@@ -4,4 +4,4 @@ keys.ini
 env/
 *.db
 *.pyc
-static/rss.xml
+site/static/rss.xml

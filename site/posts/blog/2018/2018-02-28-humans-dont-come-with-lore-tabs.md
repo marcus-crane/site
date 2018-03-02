@@ -1,5 +1,5 @@
 Title: Humans don't come with lore tabs
-Date: February 28th, 2018
+Date: February 28, 2018
 SFW: True
 
 This post has been a long time coming because I've never really known how to express it. I'm not even sure I can write it properly anyway but I'm going to at least try.
