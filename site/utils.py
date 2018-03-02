@@ -52,7 +52,7 @@ class PostRenderer(mistune.Renderer):
         if quote['author'] is not None:
             author_html = '''
             <cite class="f6 ttu tracked fs-normal">
-                ― {}
+                - {}
             </cite>
             '''.format(quote['author'])
             html = html + author_html
