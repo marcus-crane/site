@@ -7,9 +7,6 @@ services:
             - "5000:5000"
         depends_on:
             - "couchdb"
-        deploy:
-            restart_policy:
-                condition: always
 
     worker:
         container_name: worker
@@ -18,20 +15,11 @@ services:
         depends_on:
             - "rabbitmq"
             - "couchdb"
-        deploy:
-            restart_policy:
-                condition: always
     
     rabbitmq:
         image: rabbitmq
-        deploy:
-            restart_policy:
-                condition: always
 
     couchdb:
         image: couchdb
         logging:
             driver: none
-        deploy:
-            restart_policy:
-                condition: always
