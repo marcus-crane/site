@@ -1,0 +1,40 @@
+{% extends 'shared/base.html' %}
+
+{% block title %}{{ post.title }} | utf9k{% endblock %}
+
+{% block nav %}utf9k{% endblock %}
+{% block blog %}[ blog ]{% endblock %}
+
+{% block content %}
+  <article class="cf ph3 ph6-m ph7-l pv4">
+    <header class="mb2">
+      <h1 class="f2 fw9 mb1 mt0 dib">
+        {{ post.title }} {% if post.sfw %}<p class="f7 ttu dib red mt0 mb0">[nsfw]</p>{% endif %}
+      </h1>
+      <time class="f6 ttu tracked gray db">
+        {% if post.status == "P" %}
+          {{ post.published_at }}
+        {% elif post.date != "P" and post.date != None %}
+          {{ post.get_status_display }} | {{ post.created_at }}
+        {% else %}
+          {{ post.get_status_display }}
+        {% endif %}
+      </time>
+    </header>
+    <div class="fn f6 fl-ns" id="content">
+      {{ post.render|safe }}
+    </div>
+  </article>
+{% endblock %}
+
+{% if post.head %}
+  {% block head %}
+    {{ post.head|safe }}
+  {% endblock %}
+{% endif %}
+
+{% if post.foot %}
+  {% block foot %}
+    {{ post.foot|safe }}
+  {% endblock %}
+{% endif %}

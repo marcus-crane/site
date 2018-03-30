@@ -5,8 +5,12 @@ name = "pypi"
 
 [packages]
 django = "*"
+pygments = "*"
+mistune = "*"
+mistune-contrib = "*"
 
 [dev-packages]
+pylint = "*"
 
 [requires]
 python_version = "3.6"
