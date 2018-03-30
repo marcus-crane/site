@@ -2,6 +2,8 @@ __pycache__
 .DS_Store
 keys.ini
 env/
-*.db
+thingsimade/db.sqlite3
 *.pyc
 static/rss.xml
+celerybeat-schedule
+.vscode

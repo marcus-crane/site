@@ -1,0 +1,68 @@
+{% extends 'shared/base.html' %}
+
+{% block title %}stats | things i made{% endblock %}
+
+{% block nav %}104% accurate{% endblock %}
+{% block stats %}[ stats ]{% endblock %}
+
+{% block content %}
+  <article>
+    <h2 class="f4 fw6">📚 books://currently_reading</h2>
+    <div class="cf pa2">
+          {% for book in books %}
+          <dl class="mt2 f6 lh-copy">
+            <dd class="ml0 black truncate w-100">
+              <a href="{{ book.link }}">{{ book.name }}</a> by {{ book.author }}
+            </dd>
+          </dl>
+    {% endfor %}
+    </div>
+  </article>
+  <article>
+    <h2 class="f4 fw6">🎬 movies://last_watched</h2>
+    <div class="cf pa2">
+      {% for movie in movies %}
+      <div class="fl w-50 w-33-m w-sixth-l pa2">
+        <a href="{{ movie.link }}" target="_blank" rel="noopener noreferrer" class="link overflow-hidden hide-child">
+          <img src="{{ movie.image }}" width="500px" class="w-100 db outline black-10">
+          <dl class="mt2 f6 lh-copy">
+                <dd class="ml0 black truncate w-100">{{ movie.name }} ({{ movie.year }})</dd>
+              </dl>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </article>
+  <article>
+      <h2 class="f4 fw6">🎵 music://last_heard</h2>
+      <div class="cf pa2">
+          {% for song in music %}
+          <div class="fl w-50 w-33-m w-sixth-l pa2">
+            <a href="{{ song.link }}" target="_blank" rel="noopener noreferrer" class="db link dim tc">
+              <img src="{{ song.image }}" width="300px" class="w-100 db outline black-10"/>
+              <dl class="mt2 f6 lh-copy">
+                <dd class="ml0 black truncate w-100">{{ song.name }}</dd>
+                <dd class="ml0 gray truncate w-100">{{ song.artist }}</dd>
+              </dl>
+            </a>
+          </div>
+          {% endfor %}
+      </div>
+  </article>
+  <article>
+      <h2 class="f4 fw6">📺 tv://last_watched</h2>
+      <div class="cf pa2">
+          {% for show in shows %}
+          <div class="fl w-50 w-33-m w-sixth-l pa2">
+            <a href="{{ show.link }}" target="_blank" rel="noopener noreferrer" class="db link dim tc">
+              <img src="{{ show.image }}" height="143px" width="256px" class="w-100 db outline black-10"/>
+              <dl class="mt2 f6 lh-copy">
+                <dd class="ml0 black truncate w-100">{{ show.name }}</dd>
+                <dd class="ml0 gray truncate w-100">{{ show.series }}</dd>
+              </dl>
+            </a>
+          </div>
+          {% endfor %}
+      </div>
+  </article>
+{% endblock %}

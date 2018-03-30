@@ -5,8 +5,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Load API keys
-# config = configparser.ConfigParser()
-# config.read(BASE_DIR + '/keys.ini')
+config = configparser.ConfigParser()
+config.read(BASE_DIR + '/keys.ini')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'supersecretkey123pleasedontsteal'
@@ -24,7 +24,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'thingsimade',
-    'blog'
+    'blog',
+    'stats',
 ]
 
 MIDDLEWARE = [
@@ -91,11 +92,18 @@ USE_TZ = True
 # Static files
 STATIC_URL = '/static/'
 
+# Celery
+CELERY_BROKER_URL = 'amqp://localhost'
+
 # API Keys
-# LASTFM = config['keys']['lastfm']
+# GIANTBOMB = config['keys']['giantbomb']
+GOODREADS = config['keys']['goodreads']
+GOODREADS_ID = config['keys']['goodreads_id']
+LASTFM = config['keys']['lastfm']
 # STEAM = config['keys']['steam']
-# TMDB = config['keys']['tmdb']
-# TRAKT = config['keys']['trakt']
+TMDB = config['keys']['tmdb']
+TRAKT = config['keys']['trakt']
+TVDB = config['keys']['tvdb']
 
 # Production
 # DEBUG = False
@@ -103,4 +111,4 @@ STATIC_URL = '/static/'
 # SECRET_KEY = config['keys']['django']
 
 # User Agent
-USER_AGENT = { 'User-Agent': 'https://thingsima.de <marcus@thingsima.de>' }
+USER_AGENT = "User-Agent': 'https://thingsima.de <marcus@thingsima.de>"

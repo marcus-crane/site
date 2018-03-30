@@ -4,10 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
-pygments = "*"
+Django = "*"
+Pygments = "*"
 mistune = "*"
 mistune-contrib = "*"
+requests = "*"
+pytvdbapi = "*"
+celery = "*"
 
 [dev-packages]
 pylint = "*"
