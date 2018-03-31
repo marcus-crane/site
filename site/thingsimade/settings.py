@@ -95,12 +95,9 @@ USE_TZ = True
 
 # Static files
 STATIC_URL = '/static/'
-STATICFILES_DIR = [
-    os.path.join("static")
-]
 
 # Celery
-CELERY_BROKER_URL = 'amqp://localhost'
+CELERY_BROKER_URL = 'amqp://rabbitmq'
 
 # API Keys
 # GIANTBOMB = config['keys']['giantbomb']

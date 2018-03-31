@@ -4,7 +4,6 @@ from stats import sources
 
 import json
 
-
 def goodreads(data):
     """
     This parser restructures the Goodreads API response to
