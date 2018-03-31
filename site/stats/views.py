@@ -1,6 +1,8 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
 from .models import Book, Movie, Song, Show
+from stats import sources
 
 def stats(request):
     data = {
@@ -10,3 +12,10 @@ def stats(request):
         'shows': Show.objects.all()[:6]
     }
     return render(request, 'stats/index.html', data)
+
+def update(request):
+    sources.books()
+    sources.movies()
+    sources.music()
+    sources.shows()
+    return HttpResponse('Updated!')
