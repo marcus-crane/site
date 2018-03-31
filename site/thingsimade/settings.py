@@ -61,8 +61,12 @@ WSGI_APPLICATION = 'thingsimade.wsgi.application'
 # Database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('DB_ENV_DB', 'postgres'),
+        'USER': os.environ.get('DB_ENV_POSTGRES_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DB_ENV_POSTGRES_PASSWORD', 'postgres'),
+        'HOST': os.environ.get('DB_PORT_5432_TCP_ADDR', 'db'),
+        'PORT': os.environ.get('DB_PORT_5432_TCP_PORT', ''),
     }
 }
 
@@ -91,6 +95,9 @@ USE_TZ = True
 
 # Static files
 STATIC_URL = '/static/'
+STATICFILES_DIR = [
+    os.path.join("static")
+]
 
 # Celery
 CELERY_BROKER_URL = 'amqp://localhost'

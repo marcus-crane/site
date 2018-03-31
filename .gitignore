@@ -1,9 +1,7 @@
 __pycache__
 .DS_Store
-keys.ini
-env/
-thingsimade/db.sqlite3
+site/thingsimade/keys.ini
+site/thingsimade/db.sqlite3
 *.pyc
-static/rss.xml
 celerybeat-schedule
 .vscode
