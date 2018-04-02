@@ -8,12 +8,19 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 config = configparser.ConfigParser()
 config.read(BASE_DIR + '/keys.ini')
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'supersecretkey123pleasedontsteal'
-
-# SECURITY WARNING: don't run with debug turned on in production!
+# Default development keys
 DEBUG = True
 ALLOWED_HOSTS = []
+SECRET_KEY = 'supersecretkey123pleasedontsteal'
+STATIC_URL = '/static/'
+
+# Production keys
+if os.getenv('PRODUCTION') == True:
+    DEBUG = False
+    ALLOWED_HOSTS = ['*']
+    # SECRET_KEY = config['keys']['django']
+    SECRET_KEY = 'supersecretkey123pleasedontsteal'
+    STATIC_URL = 'https://static.thingsima.de/'
 
 # Application definition
 INSTALLED_APPS = [
@@ -105,15 +112,6 @@ LASTFM = config['keys']['lastfm']
 TMDB = config['keys']['tmdb']
 TRAKT = config['keys']['trakt']
 TVDB = config['keys']['tvdb']
-
-# Production
-DEBUG = False
-ALLOWED_HOSTS = ['*']
-SECRET_KEY = config['keys']['django']
-
-# Static files
-STATIC_ROOT = '/var/www/static/'
-STATIC_URL = '/static/'
 
 # User Agent
 USER_AGENT = "https://thingsima.de <marcus@thingsima.de>"

@@ -2,11 +2,12 @@ version: '3'
 
 services:
   site:
+    restart: always
     build: ./site
     hostname: site
-    command: python site/manage.py runserver 0.0.0.0:8000
+    command: ./run_site.sh
     environment:
-      - PRODUCTION=False
+      - PRODUCTION=True
     volumes:
       - .:/app
     ports:
@@ -18,6 +19,7 @@ services:
       - db
 
   worker:
+    restart: always
     build: ./site
     command: ./run_celery.sh
     volumes:
@@ -29,6 +31,7 @@ services:
       - rabbitmq
 
   db:
+    restart: always
     image: postgres:latest
     hostname: db
     environment:
@@ -39,6 +42,7 @@ services:
       - "5432:5432"
   
   rabbitmq:
+    restart: always
     hostname: rabbitmq
     image: rabbitmq:latest
     ports:
