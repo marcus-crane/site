@@ -15,7 +15,7 @@ SECRET_KEY = 'supersecretkey123pleasedontsteal'
 STATIC_URL = '/static/'
 
 # Production keys
-if os.getenv('PRODUCTION') == True:
+if os.getenv('PRODUCTION') == "True":
     DEBUG = False
     ALLOWED_HOSTS = ['*']
     SECRET_KEY = config['keys']['django']
