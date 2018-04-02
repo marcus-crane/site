@@ -1,0 +1,33 @@
+{% extends 'shared/base.html' %}
+
+{% block title %}utf9k{% endblock %}
+
+{% block nav %}utf9k{% endblock %}
+{% block blog %}[ blog ]{% endblock %}
+
+{% block content %}
+<section class="pa3 pa4-m pa5-l">
+  {% for post in posts %}
+    <!-- <h4 class="f6 fw6">{{ year }}</h4> -->
+    <dl class="f6 lh-title mv2">
+    	<dt class="dib ml0 gray">
+            {% if post.published_at %}
+                {{ post.published_at }}
+            {% else %}
+                {{ post.created_at }}
+            {% endif %}
+        </dt>
+    	<dd class="dib red">
+    		<a class="b link" href="{{ post.slug }}">
+    			{{ post.title }}
+    		</a>
+    		{% if not post.sfw %}
+    		nsfw
+    		{% endif %}
+    	</dd>
+    </dl>
+  {% empty %}
+    <b class="db f4 mb1">No posts have been written yet!</b>
+  {% endfor %}
+</section>
+{% endblock %}

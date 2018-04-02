@@ -1,9 +1,0 @@
-{
-    "name": "Things I Made",
-    "short_name": "TIM",
-    "start_url": "/",
-    "theme_color": "#f92672",
-    "background_color": "#ffffff",
-    "display": "fullscreen",
-    "orientation": "portrait"
-}

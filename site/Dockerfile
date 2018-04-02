@@ -1,9 +1,7 @@
-FROM python:3.6-alpine
+FROM python:3.6
 
-RUN mkdir /code
-WORKDIR /code
-COPY requirements.txt /code
+ADD requirements.txt /app/requirements.txt
+
+WORKDIR /app
+
 RUN pip install -r requirements.txt
-COPY . /code/
-
-CMD ["python", "app.py"]
