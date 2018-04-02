@@ -21,9 +21,9 @@ class Post(models.Model):
     text = models.TextField("Post content")
     head = models.TextField("CSS/JS to include in the <head> of this post", blank=True)
     foot = models.TextField("CSS/JS to include in the bottom of this post", blank=True)
-    created_at = models.DateField("First created", auto_now=True)
-    published_at = models.DateField("Publication Date", blank=True, null=True)
-    last_modified = models.DateField("Last Modified", auto_now=True)
+    created_at = models.DateTimeField("First created")
+    published_at = models.DateTimeField("Publication Date", blank=True, null=True)
+    last_modified = models.DateTimeField("Last Modified", auto_now=True)
     status = models.CharField(max_length=1, choices=POST_STATUS)
 
     def save(self, *args, **kwargs):
@@ -33,7 +33,10 @@ class Post(models.Model):
         # TODO: Trigger RSS rebuild
         self.slug = slugify(self.title)
         self.last_modified = datetime.datetime.now()
-        if self.published_at > self.created_at:
+        # Check if publication date is in the past ie; importing old posts
+        if not self.created_at:
+            self.created_at = datetime.datetime.now()
+        if self.published_at < self.created_at:
             self.created_at = self.published_at
         super(Post, self).save(*args, **kwargs)
 
