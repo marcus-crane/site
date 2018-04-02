@@ -18,8 +18,7 @@ STATIC_URL = '/static/'
 if os.getenv('PRODUCTION') == True:
     DEBUG = False
     ALLOWED_HOSTS = ['*']
-    # SECRET_KEY = config['keys']['django']
-    SECRET_KEY = 'supersecretkey123pleasedontsteal'
+    SECRET_KEY = config['keys']['django']
     STATIC_URL = 'https://static.thingsima.de/'
 
 # Application definition
