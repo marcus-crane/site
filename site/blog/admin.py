@@ -8,8 +8,8 @@ def publish(modeladmin, request, queryset):
     publish.short_description="Publish posts"
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'created_at', 'published_at', 'status')
-    list_filter = ['created_at', 'published_at', 'status']
+    list_display = ('title', 'published_at', 'status')
+    list_filter = ['published_at', 'status']
     search_fields = ['title', 'status']
     actions = [publish]
 

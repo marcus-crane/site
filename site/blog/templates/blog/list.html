@@ -11,11 +11,7 @@
     <!-- <h4 class="f6 fw6">{{ year }}</h4> -->
     <dl class="f6 lh-title mv2">
     	<dt class="dib ml0 gray">
-            {% if post.published_at %}
-                {{ post.published_at }}
-            {% else %}
-                {{ post.created_at }}
-            {% endif %}
+            {{ post.published_at }}
         </dt>
     	<dd class="dib red">
     		<a class="b link" href="{{ post.slug }}">
