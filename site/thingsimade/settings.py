@@ -93,9 +93,6 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-# Static files
-STATIC_URL = '/static/'
-
 # Celery
 CELERY_BROKER_URL = 'amqp://rabbitmq'
 
@@ -110,9 +107,13 @@ TRAKT = config['keys']['trakt']
 TVDB = config['keys']['tvdb']
 
 # Production
-# DEBUG = False
-# ALLOWED_HOSTS = ['thingsima.de', 'www.thingsima.de']
-# SECRET_KEY = config['keys']['django']
+DEBUG = False
+ALLOWED_HOSTS = ['*']
+SECRET_KEY = config['keys']['django']
+
+# Static files
+STATIC_ROOT = '/var/www/static/'
+STATIC_URL = '/static/'
 
 # User Agent
-USER_AGENT = "User-Agent': 'https://thingsima.de <marcus@thingsima.de>"
+USER_AGENT = "https://thingsima.de <marcus@thingsima.de>"
