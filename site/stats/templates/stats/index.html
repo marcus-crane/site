@@ -22,11 +22,15 @@
     <h2 class="f4 fw6">🕹 games://currently_playing</h2>
     <div class="cf pa2">
       {% for game in games %}
-      <dl class="mt2 f6 lh-copy">
-        <dd class="ml0 black truncate w-100">
-          <a href="#">{{ game.name }}</a> on {{ game.platform }}
-        </dd>
-      </dl>
+      <div class="fl w-50 w-33-m w-sixth-l pa2">
+            <a href="{{ game.link }}" target="_blank" rel="noopener noreferrer" class="db link dim tc">
+              <img src="{{ game.image }}" width="300px" class="w-100 db outline black-10"/>
+              <dl class="mt2 f6 lh-copy">
+                <dd class="ml0 black truncate w-100">{{ game.name }}</dd>
+                <dd class="ml0 gray truncate w-100">{{ game.platform }}</dd>
+              </dl>
+            </a>
+          </div>
       {% endfor %}
     </div>
   </article>

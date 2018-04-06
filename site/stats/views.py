@@ -11,7 +11,6 @@ def stats(request):
         'music': Song.objects.all()[:6],
         'shows': Show.objects.all()[:6]
     }
-    print(data)
     return render(request, 'stats/index.html', data)
 
 def update(request):

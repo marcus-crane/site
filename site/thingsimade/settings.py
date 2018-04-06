@@ -103,12 +103,11 @@ USE_TZ = True
 CELERY_BROKER_URL = 'amqp://rabbitmq'
 
 # API Keys
-# GIANTBOMB = config['keys']['giantbomb']
+GIANTBOMB = config['keys']['giantbomb']
 GOODREADS = config['keys']['goodreads']
 GOODREADS_ID = config['keys']['goodreads_id']
 HLTB = config['keys']['hltb_username']
 LASTFM = config['keys']['lastfm']
-# STEAM = config['keys']['steam']
 TMDB = config['keys']['tmdb']
 TRAKT = config['keys']['trakt']
 TVDB = config['keys']['tvdb']

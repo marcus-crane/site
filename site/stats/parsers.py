@@ -37,11 +37,23 @@ def howlongtobeat(data):
     platform_soup = soup.find_all("span", {"class": "text_grey"})
     titles = [title.get_text().strip() for title in title_soup]
     platforms = [platform.get_text().strip() for platform in platform_soup]
-    print(titles, platforms)
     for i in range(len(titles)):
-        print(titles[i])
-        Game.objects.create(name=titles[i], platform=platforms[i])
+        info = sources.game_data(titles[i])
+        platform = platforms[i]
+        image = info['img']
 
+        if len(info) == 1:
+            name = titles[i]
+            link = '#'
+            year = '0000'
+        else:
+            name = info['name']
+            link = info['link']
+            year = info['year']
+        
+        Game.objects.create(name=name, image=image,
+                            link=link, year=year,
+                            platform=platform)
 
 def lastfm(data):
     """
@@ -54,7 +66,6 @@ def lastfm(data):
     :param data: A serialised JSON string.
     :return: A dictionary object.
     """
-    data = json.loads(data)
     Song.objects.all().delete()
     tracks = data['recenttracks']['track']
     for item in tracks:
@@ -82,7 +93,6 @@ def trakt_movies(data):
     :param data: A serialised JSON string.
     :return: A dictionary object.
     """
-    data = json.loads(data)
     Movie.objects.all().delete()
     for item in data:
         tmdb = item['movie']['ids']['tmdb']
@@ -112,7 +122,6 @@ def trakt_shows(data):
     :param data: A serialised JSON string.
     :return: A dictionary object.
     """
-    data = json.loads(data)
     Show.objects.all().delete()
     for item in data:
         slug = item['show']['ids']['slug']

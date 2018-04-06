@@ -6,7 +6,7 @@ from django.conf import settings
 from pytvdbapi import api
 import requests
 
-def query_service(url, headers={}, payload=None):
+def query_service(url, headers={}, payload={}):
     """
     A generalised function that handles making requests and
     injecting a user agent header.
@@ -19,13 +19,15 @@ def query_service(url, headers={}, payload=None):
     :param method: A string containing either GET or POST
     :param headers: A dictionary containing any other required headers.
     :param payload: A dictionary containing data to send
-    :return: A serialised string.
+    :return: A string or dictionary.
     """
     headers['User-Agent'] = settings.USER_AGENT
-    if payload is not None:
+    if bool(payload):
         r = requests.post(url, headers=headers, data=payload)
     else:
         r = requests.get(url, headers=headers)
+    if 'json' in headers['Content-Type']:
+        return r.json()
     return r.text
 
 
@@ -45,16 +47,41 @@ def film_covers(tmdb):
     """
     url = ('https://api.themoviedb.org/3/movie/{}/images'
            '?api_key={}'.format(tmdb, settings.TMDB))
-    headers = {'User-Agent': settings.USER_AGENT}
-    r = requests.get(url, headers=headers)
+    headers = {'Content-Type': 'application/json'}
     try:
-        data = r.json()
+        data = query_service(url, headers)
         poster = data['posters'][0]['file_path']
         img = 'https://image.tmdb.org/t/p/w500{}'.format(poster)
     except Exception:
-        img = '/static/img/no_cover.png'
+        img = 'https://static.thingsima.de/shared/img/no_cover.png'
 
     return img
+
+def game_data(title):
+    """
+    This function fetches game cover art and other data from Giant Bomb.
+
+    It assumes that the first result will also be the correct
+    entry and pulls from that.
+
+    :param title: A string containing the name of a videogame.
+    :return A dictionary containing a game name, image, id and release year
+    """
+    url = ('https://www.giantbomb.com/api/search?query={0}'
+           '&api_key={1}&format=json'.format(title, settings.GIANTBOMB))
+    headers = {'Content-Type': 'application/json'}
+    game = {}
+    try:
+        data = query_service(url, headers)
+        entry = data['results'][0]
+        game['img'] = entry['image']['super_url']
+        game['link'] = entry['site_detail_url']
+        game['name'] = entry['name']
+        game['year'] = entry['original_release_date'][0:3]
+    except Exception:
+        game['img'] = 'https://static.thingsima.de/shared/img/no_cover.png'
+
+    return game
 
 
 def show_covers(season, number, series):
@@ -89,7 +116,7 @@ def show_covers(season, number, series):
         else:
             raise Exception
     except Exception:
-        img = '/static/img/no_still.png'
+        img = 'https://static.thingsima.de/shared/img/no_still.png'
 
     return img
 
@@ -97,21 +124,22 @@ def show_covers(season, number, series):
 def books():
     """
     Calling this kicks off everything required to store recently
-    read books in CouchDB.
+    read books in the database.
 
     :return: N/A
     """
     url = ('https://www.goodreads.com/review/list?'
            'shelf=currently-reading&key={0}&id={1}'
            'v=2'.format(settings.GOODREADS, settings.GOODREADS_ID))
-    data = query_service(url)
+    headers = {'Content-Type': 'application/xml'}
+    data = query_service(url, headers)
     root = ET.fromstring(data)[1]
     parsers.goodreads(root)
 
 def games():
     """
     Calling this kicks off everything required to store recently
-    played games in the DB.
+    played games in the database.
 
     :return: N/A
     """
@@ -125,7 +153,7 @@ def games():
 def movies():
     """
     Calling this kicks off everything required to store recently
-    watched movies in CouchDB.
+    watched movies in the database.
 
     :return: N/A
     """
@@ -140,7 +168,7 @@ def movies():
 def music():
     """
     Calling this kicks off everything required to store recently
-    listened music in CouchDB.
+    listened music in the database.
 
     :return: N/A
     """
@@ -148,14 +176,15 @@ def music():
            'method=user.getrecenttracks'
            '&user=sentryism&api_key={}'
            '&format=json&limit=10'.format(settings.LASTFM))
-    data = query_service(url)
+    headers = {'Content-Type': 'application/json'}
+    data = query_service(url, headers)
     parsers.lastfm(data)
 
 
 def shows():
     """
     Calling this kicks off everything required to store recently
-    watched TV series in CouchDB.
+    watched TV series in the database.
 
     :return: N/A
     """

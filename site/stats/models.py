@@ -11,10 +11,13 @@ class Book(models.Model):
 
 class Game(models.Model):
     name = models.CharField(max_length=200)
+    image = models.URLField()
+    link = models.URLField()
+    year = models.IntegerField()
     platform = models.CharField(max_length=200)
 
     def __str__(self):
-        return "{0} ({1})".format(self.name, self.platform)
+        return "{0} ({1})".format(self.name, self.year)
 
 class Movie(models.Model):
     name = models.CharField(max_length=200)
