@@ -9,6 +9,13 @@ class Book(models.Model):
     def __str__(self):
         return "{0} by {1}".format(self.name, self.author)
 
+class Game(models.Model):
+    name = models.CharField(max_length=200)
+    platform = models.CharField(max_length=200)
+
+    def __str__(self):
+        return "{0} ({1})".format(self.name, self.platform)
+
 class Movie(models.Model):
     name = models.CharField(max_length=200)
     image = models.URLField()

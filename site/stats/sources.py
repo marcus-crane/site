@@ -6,7 +6,7 @@ from django.conf import settings
 from pytvdbapi import api
 import requests
 
-def query_service(url, headers={}):
+def query_service(url, headers={}, payload=None):
     """
     A generalised function that handles making requests and
     injecting a user agent header.
@@ -16,11 +16,16 @@ def query_service(url, headers={}):
     function (eg json.loads or xml.etree.ElementTree)
 
     :param url: A string containing the URL to be requested.
+    :param method: A string containing either GET or POST
     :param headers: A dictionary containing any other required headers.
+    :param payload: A dictionary containing data to send
     :return: A serialised string.
     """
     headers['User-Agent'] = settings.USER_AGENT
-    r = requests.get(url, headers=headers)
+    if payload is not None:
+        r = requests.post(url, headers=headers, data=payload)
+    else:
+        r = requests.get(url, headers=headers)
     return r.text
 
 
@@ -102,6 +107,19 @@ def books():
     data = query_service(url)
     root = ET.fromstring(data)[1]
     parsers.goodreads(root)
+
+def games():
+    """
+    Calling this kicks off everything required to store recently
+    played games in the DB.
+
+    :return: N/A
+    """
+    payload = {'n': settings.HLTB, 'playing': '1'}
+    headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+    url = 'https://howlongtobeat.com/user_games_list.php'
+    data = query_service(url, headers=headers, payload=payload)
+    parsers.howlongtobeat(data)
 
 
 def movies():

@@ -1,8 +1,9 @@
-from .models import Book, Movie, Song, Show
-
+from .models import Book, Game, Movie, Song, Show
 from stats import sources
 
 import json
+
+from bs4 import BeautifulSoup
 
 def goodreads(data):
     """
@@ -21,6 +22,25 @@ def goodreads(data):
 
         Book.objects.create(name=name, image=image,
                             link=link, author=author)
+
+def howlongtobeat(data):
+    """
+    This parser restructures the How Long To Beat user games
+    query to strip out any unneeded HTML elements
+
+    :param data: An HTML snippet.
+    :return: A dictionary object.
+    """
+    soup = BeautifulSoup(data, 'html.parser')
+    Game.objects.all().delete()
+    title_soup = soup.find_all("a", {"class": "text_green"})
+    platform_soup = soup.find_all("span", {"class": "text_grey"})
+    titles = [title.get_text().strip() for title in title_soup]
+    platforms = [platform.get_text().strip() for platform in platform_soup]
+    print(titles, platforms)
+    for i in range(len(titles)):
+        print(titles[i])
+        Game.objects.create(name=titles[i], platform=platforms[i])
 
 
 def lastfm(data):

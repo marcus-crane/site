@@ -106,6 +106,7 @@ CELERY_BROKER_URL = 'amqp://rabbitmq'
 # GIANTBOMB = config['keys']['giantbomb']
 GOODREADS = config['keys']['goodreads']
 GOODREADS_ID = config['keys']['goodreads_id']
+HLTB = config['keys']['hltb_username']
 LASTFM = config['keys']['lastfm']
 # STEAM = config['keys']['steam']
 TMDB = config['keys']['tmdb']

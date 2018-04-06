@@ -13,6 +13,7 @@ pytvdbapi = "*"
 celery = "*"
 gunicorn = "*"
 "psycopg2-binary" = "*"
+"beautifulsoup4" = "*"
 
 [dev-packages]
 pylint = "*"

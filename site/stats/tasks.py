@@ -6,11 +6,15 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'thingsimade.settings')
 import django
 django.setup()
 
-from .sources import books, movies, music, shows
+from .sources import books, games, movies, music, shows
 
 @shared_task
 def update_books():
     books()
+
+@shared_task
+def update_games():
+    games()
 
 @shared_task
 def update_movies():
