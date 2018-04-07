@@ -6,3 +6,4 @@ site/env
 *.pyc
 celerybeat-schedule
 .vscode
+data
