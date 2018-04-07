@@ -31,8 +31,6 @@ services:
   db:
     image: postgres:latest
     hostname: db
-    volumes:
-      - ./data:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres

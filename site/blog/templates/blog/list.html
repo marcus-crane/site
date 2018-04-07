@@ -11,7 +11,7 @@
     <!-- <h4 class="f6 fw6">{{ year }}</h4> -->
     <dl class="f6 lh-title mv2">
     	<dt class="dib ml0 gray">
-            {{ post.published_at }}
+            {{ post.published_at|date:"N d, Y" }}
         </dt>
     	<dd class="dib red">
     		<a class="b link" href="{{ post.slug }}">
