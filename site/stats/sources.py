@@ -61,8 +61,8 @@ def game_data(title):
     """
     This function fetches game cover art and other data from Giant Bomb.
 
-    It assumes that the first result will also be the correct
-    entry and pulls from that.
+    It assumes that the first result which has the resource_type of game
+    is going to be the correct entry.
 
     :param title: A string containing the name of a videogame.
     :return A dictionary containing a game name, image, id and release year
@@ -73,11 +73,12 @@ def game_data(title):
     game = {}
     try:
         data = query_service(url, headers)
-        entry = data['results'][0]
+        entries = data['results']
+        entry = list(filter(lambda x: x['resource_type'] == 'game', entries))[0]
         game['img'] = entry['image']['super_url']
         game['link'] = entry['site_detail_url']
         game['name'] = entry['name']
-        game['year'] = entry['original_release_date'][0:3]
+        game['year'] = int(entry['original_release_date'][0:3])
     except Exception:
         game['img'] = 'https://static.thingsima.de/shared/img/no_cover.png'
 
