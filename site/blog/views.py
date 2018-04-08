@@ -1,3 +1,4 @@
+import datetime
 from django.contrib.syndication.views import Feed
 from django.utils import timezone
 from django.urls import reverse
@@ -16,7 +17,9 @@ class PostView(generic.ListView):
 
     def get_queryset(self):
         """ Fetch only published posts, and order by descending date """
-        return Post.objects.filter(published_at__lte=timezone.now(), status="P").order_by('-published_at')
+        return Post.objects.filter(
+            published_at__lte=timezone.now(), status="P"
+        ).order_by('-published_at')
 
 class RSSFeed(Feed):
     title = "utf9k"
@@ -28,6 +31,9 @@ class RSSFeed(Feed):
 
     def item_title(self, item):
         return item.title
+
+    def item_pubdate(self, item):
+        return datetime.datetime.combine(item.published_at, datetime.time())
 
     def item_description(self, item):
         return item.render()
