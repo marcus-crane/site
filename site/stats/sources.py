@@ -30,6 +30,22 @@ def query_service(url, headers={}, payload={}):
         return r.json()
     return r.text
 
+def book_covers(title):
+    url = ('https://goodreads.com/search/index.xml?key={0}'
+           '&q={1}'.format(settings.GOODREADS, title))
+    headers = {'Content-Type': 'application/xml'}
+    try:
+        data = query_service(url, headers)
+        root = ET.fromstring(data)
+        cover = root[1][6][0][8][3].text
+        img = 'https://images.gr-assets.com/books/{}/{}'.format(
+            cover.split('/')[4].replace('m', 'l'),
+            cover.split('/')[5]
+        )
+    except Exception:
+        img = 'https://static.thingsima.de/shared/img/no_cover.png'
+    
+    return img
 
 def film_covers(tmdb):
     """

@@ -16,7 +16,7 @@ def goodreads(data):
     Book.objects.all().delete()
     for item in data:
         name = item[6].text
-        image = item[7].text
+        image = sources.book_covers(name)
         link = item[10].text
         author = item[21][0][1].text
 

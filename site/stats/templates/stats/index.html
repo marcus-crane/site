@@ -10,11 +10,15 @@
     <h2 class="f4 fw6">📚 books://currently_reading</h2>
     <div class="cf pa2">
       {% for book in books %}
-      <dl class="mt2 f6 lh-copy">
-        <dd class="ml0 black truncate w-100">
-          <a href="{{ book.link }}">{{ book.name }}</a> by {{ book.author }}
-        </dd>
-      </dl>
+      <div class="fl w-50 w-33-m w-sixth-l pa2">
+        <a href="{{ book.link }}" target="_blank" rel="noopener noreferrer" class="db link dim tc">
+          <img src="{{ book.image }}" width="300px" class="w-100 db outline black-10"/>
+          <dl class="mt2 f6 lh-copy">
+            <dd class="ml0 black truncate w-100">{{ book.name }}</dd>
+            <dd class="ml0 gray truncate w-100">{{ book.author }}</dd>
+          </dl>
+        </a>
+      </div>
       {% endfor %}
     </div>
   </article>
@@ -23,14 +27,14 @@
     <div class="cf pa2">
       {% for game in games %}
       <div class="fl w-50 w-33-m w-sixth-l pa2">
-            <a href="{{ game.link }}" target="_blank" rel="noopener noreferrer" class="db link dim tc">
-              <img src="{{ game.image }}" width="300px" class="w-100 db outline black-10"/>
-              <dl class="mt2 f6 lh-copy">
-                <dd class="ml0 black truncate w-100">{{ game.name }}</dd>
-                <dd class="ml0 gray truncate w-100">{{ game.platform }}</dd>
-              </dl>
-            </a>
-          </div>
+          <a href="{{ game.link }}" target="_blank" rel="noopener noreferrer" class="db link dim tc">
+            <img src="{{ game.image }}" width="300px" class="w-100 db outline black-10"/>
+            <dl class="mt2 f6 lh-copy">
+              <dd class="ml0 black truncate w-100">{{ game.name }}</dd>
+              <dd class="ml0 gray truncate w-100">{{ game.platform }}</dd>
+            </dl>
+          </a>
+        </div>
       {% endfor %}
     </div>
   </article>
