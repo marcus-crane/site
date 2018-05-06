@@ -6,24 +6,29 @@
 {% block blog %}[ blog ]{% endblock %}
 
 {% block content %}
-<section class="pa3 pa4-m pa5-l">
-  {% for post in posts %}
-    <!-- <h4 class="f6 fw6">{{ year }}</h4> -->
-    <dl class="f6 lh-title mv2">
-    	<dt class="dib ml0 gray">
+<div class="container col-11 pushback">
+  <div class="columns">
+    <div class="column col-9 col-sm-12">
+    {% for post in posts %}
+      <div class="tile tile-centered ml-2 blog-entry">
+        <div class="tile-content">
+          <div class="tile-title">
+            <a href="{{ post.slug }}">
+              {{ post.title }}
+            </a>
+            {% if not post.sfw %}<sup class="nsfw">nsfw</sup>{% endif %}
+          </div>
+          <div class="tile-subtitle text-gray">
             {{ post.published_at|date:"N d, Y" }}
-        </dt>
-    	<dd class="dib red">
-    		<a class="b link" href="{{ post.slug }}">
-    			{{ post.title }}
-    		</a>
-    		{% if not post.sfw %}
-    		nsfw
-    		{% endif %}
-    	</dd>
-    </dl>
-  {% empty %}
-    <b class="db f4 mb1">No posts have been written yet!</b>
-  {% endfor %}
-</section>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="empty">
+        <p class="empty-title h5">No blog posts</p>
+        <p class="empty-subtitle">Nothing has been written anything yet!</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}
