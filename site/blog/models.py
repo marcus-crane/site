@@ -55,11 +55,20 @@ class Post(models.Model):
 
 class PostRenderer(mistune.Renderer):
     def block_code(self, code, lang):
-        if not lang:
-            return '\n<pre><code>{}</code></pre>\n'.format(mistune.escape(code))
-        lexer = get_lexer_by_name(lang, stripall=True)
-        formatter = html.HtmlFormatter()
-        return highlight(code, lexer, formatter)
+        return '<pre class="code" data-lang="{}"><code>{}</code></pre>'.format(lang, mistune.escape(code))
+
+
+    def table(self, header, body):
+        return """
+        <table class="table table-hover table-striped mb-2">
+            <thead>
+                {0}
+            </thead>
+            <tbody>
+                {1}
+            </tbody>
+        </table>
+        """.format(header, body)
 
     def pull_attribution(self, lines):
         print(lines)
@@ -85,24 +94,12 @@ class PostRenderer(mistune.Renderer):
 
     def build_quote(self, quote):
         html = ''
-        text_html = '''
-        <p class="f5 f4-m f3-l lh-copy measure mt0">
-            {}
-        </p>
-        '''.format(quote['text'])
+        text_html = "<p>{}</p>".format(quote['text'])
         html = html + text_html
 
         if quote['author'] is not None:
-            author_html = '''
-            <cite class="f6 ttu tracked fs-normal">
-                - {}
-            </cite>
-            '''.format(quote['author'])
+            author_html = "<cite>- {}</cite>".format(quote['author'])
             html = html + author_html
 
-        blockquote = '''
-        <blockquote class="athelas ml0 mt0 pl4 black-90 bl bw2 b--blue">
-            {}
-        </blockquote>
-        '''.format(html)
+        blockquote = "<blockquote>{}</blockquote>".format(html)
         return blockquote
