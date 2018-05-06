@@ -7,3 +7,5 @@ site/env
 celerybeat-schedule
 .vscode
 data
+venv
+site/venv
