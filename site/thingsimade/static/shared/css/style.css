@@ -1,112 +1,25 @@
-/* Globals */
+/* General */
 
-h1, h2, h3, h4, h5, h6, p, a, b, dd, dl, dt, 
-time, input, small, label, legend, textarea,
-input, button {
-  color: #000;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1em;
-  font-weight: 400;
+.pushback {
+  padding-top: 4rem;
 }
 
-/* Home */
+/* Blog */
 
-p.home {
-  margin: 18px 0;
+.blog-entry {
+	padding-bottom: .8rem;
 }
 
-/* Sticky footer */
-
-body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+.nsfw {
+	color: red;
 }
 
-article #pager { flex: 1; }
-
-/* Post Detail */
-
-#title {
-  margin-bottom: 0.2em;
+/* Stats */
+#books {
+  margin-bottom: 2rem;
 }
 
-.meta p {
-    font-style: italic;
-    margin: 0;
-}
-
-#content p:first-child {
-  margin-top: 0;
-}
-
-#content h1 {
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-
-#content h2 {
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-#content p {
-  font-size: 18px;
-  line-height: 1.4;
-}
-
-code {
-  color: #F99157;
-  font-size: 85%;
-}
-
-thead tr th, tbody tr td, tbody tr td a {
-  font-family: monospace;
-}
-
-/* Tables */
-
-table {
-  border-collapse: collapse;
-  padding: 0;
-  width: 100%;
-  color: #D8DEE9; 
-}
-
-table tr {
-  background-color: #1B2B34;
-  margin: 0;
-  padding: 0; 
-}
-
-table tr:nth-child(2n) {
-  background-color: #1B2B34;
-}
-
-table tr th {
-  font-weight: bold;
-  text-align: left;
-  margin: 0;
-  padding: 6px 13px;
-}
-
-table tr td {
-  text-align: left;
-  margin: 0;
-  padding: 6px 13px;
-}
-
-table tr th :first-child, table tr td :first-child {
-  margin-top: 0;
-}
-
-table tr th :last-child, table tr td :last-child {
-  margin-bottom: 0;
-}
-
-table tr a {
-  color: #D8DEE9;
-}
-h1 a {
-  text-decoration: none;
+#films, #games, #music, #shows {
+	margin-bottom: 2rem;
+	margin-top: 2rem;
 }

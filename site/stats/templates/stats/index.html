@@ -6,83 +6,100 @@
 {% block stats %}[ stats ]{% endblock %}
 
 {% block content %}
-  <article>
-    <h2 class="f4 fw6">📚 books://currently_reading</h2>
-    <div class="cf pa2">
+<div class="container col-11 pushback">
+  <div id="books">
+    <p>Books I'm (very slowly) reading</p>
+    <div class="columns">
       {% for book in books %}
-      <div class="fl w-50 w-33-m w-sixth-l pa2">
-        <a href="{{ book.link }}" target="_blank" rel="noopener noreferrer" class="db link dim tc">
-          <img src="{{ book.image }}" width="300px" class="w-100 db outline black-10"/>
-          <dl class="mt2 f6 lh-copy">
-            <dd class="ml0 black truncate w-100">{{ book.name }}</dd>
-            <dd class="ml0 gray truncate w-100">{{ book.author }}</dd>
-          </dl>
-        </a>
-      </div>
-      {% endfor %}
-    </div>
-  </article>
-  <article>
-    <h2 class="f4 fw6">🕹 games://currently_playing</h2>
-    <div class="cf pa2">
-      {% for game in games %}
-      <div class="fl w-50 w-33-m w-sixth-l pa2">
-          <a href="{{ game.link }}" target="_blank" rel="noopener noreferrer" class="db link dim tc">
-            <img src="{{ game.image }}" width="300px" class="w-100 db outline black-10"/>
-            <dl class="mt2 f6 lh-copy">
-              <dd class="ml0 black truncate w-100">{{ game.name }}</dd>
-              <dd class="ml0 gray truncate w-100">{{ game.platform }}</dd>
-            </dl>
-          </a>
+      <div class="column col-2 col-md-4 col-sm-12">
+        <div class="card">
+          <div class="card-image">
+            <img class="img-responsive" src="{{ book.image }}" alt="The cover for {{ book.name }}">
+          </div>
+          <div class="card-header">
+            <div class="card-title">{{ book.name }}</div>
+            <div class="card-subtitle text-gray">{{ book.author }}</div>
+          </div>
         </div>
+      </div>
       {% endfor %}
     </div>
-  </article>
-  <article>
-    <h2 class="f4 fw6">🎬 movies://last_watched</h2>
-    <div class="cf pa2">
+  </div>
+
+  <div id="films">
+    <p>Films I've recently watched</p>
+    <div class="columns">
       {% for movie in movies %}
-      <div class="fl w-50 w-33-m w-sixth-l pa2">
-        <a href="{{ movie.link }}" target="_blank" rel="noopener noreferrer" class="link overflow-hidden hide-child">
-          <img src="{{ movie.image }}" width="500px" class="w-100 db outline black-10">
-          <dl class="mt2 f6 lh-copy">
-                <dd class="ml0 black truncate w-100">{{ movie.name }} ({{ movie.year }})</dd>
-              </dl>
-        </a>
+      <div class="column col-2 col-md-4 col-sm-12">
+        <div class="card">
+          <div class="card-image">
+            <img class="img-responsive" src="{{ movie.image }}" alt="The poster for {{ movie.name }}">
+          </div>
+          <div class="card-header">
+            <div class="card-title">{{ movie.name }}</div>
+            <div class="card-subtitle text-gray">{{ movie.year }}</div>
+          </div>
+        </div>
       </div>
       {% endfor %}
     </div>
-  </article>
-  <article>
-      <h2 class="f4 fw6">🎵 music://last_heard</h2>
-      <div class="cf pa2">
-          {% for song in music %}
-          <div class="fl w-50 w-33-m w-sixth-l pa2">
-            <a href="{{ song.link }}" target="_blank" rel="noopener noreferrer" class="db link dim tc">
-              <img src="{{ song.image }}" width="300px" class="w-100 db outline black-10"/>
-              <dl class="mt2 f6 lh-copy">
-                <dd class="ml0 black truncate w-100">{{ song.name }}</dd>
-                <dd class="ml0 gray truncate w-100">{{ song.artist }}</dd>
-              </dl>
-            </a>
+  </div>
+
+  <div id="games">
+    <p>Games I'm currently playing</p>
+    <div class="columns">
+      {% for game in games %}
+      <div class="column col-2 col-md-4 col-sm-12">
+        <div class="card">
+          <div class="card-image">
+            <img class="img-responsive" src="{{ game.image }}   " alt="Box art for {{ game.name }}">
           </div>
-          {% endfor %}
-      </div>
-  </article>
-  <article>
-      <h2 class="f4 fw6">📺 tv://last_watched</h2>
-      <div class="cf pa2">
-          {% for show in shows %}
-          <div class="fl w-50 w-33-m w-sixth-l pa2">
-            <a href="{{ show.link }}" target="_blank" rel="noopener noreferrer" class="db link dim tc">
-              <img src="{{ show.image }}" height="143px" width="256px" class="w-100 db outline black-10"/>
-              <dl class="mt2 f6 lh-copy">
-                <dd class="ml0 black truncate w-100">{{ show.name }}</dd>
-                <dd class="ml0 gray truncate w-100">{{ show.series }}</dd>
-              </dl>
-            </a>
+          <div class="card-header">
+            <div class="card-title">{{ game.name }}</div>
+            <div class="card-subtitle text-gray">{{ game.platform }}</div>
           </div>
-          {% endfor %}
+        </div>
       </div>
-  </article>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div id="music">
+    <p>Music I've recently listened to</p>
+    <div class="columns">
+    {% for song in music %}
+    <div class="column col-2 col-md-4 col-sm-12">
+      <div class="card">
+        <div class="card-image">
+          <img class="img-responsive" src="{{ song.image }}" alt="Art for the album that {{ song.name }} appears in">
+        </div>
+        <div class="card-header">
+          <div class="card-title">{{ song.name }}</div>
+          <div class="card-subtitle text-gray">{{ song.artist }}</div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    </div>
+  </div>
+
+  <div id="shows">
+    <p>TV series I've recently watched</p>
+    <div class="columns">
+      {% for show in shows %}
+      <div class="column col-2 col-md-4 col-sm-12">
+        <div class="card">
+          <div class="card-image">
+            <img class="img-responsive" src="{{ show.image }}" alt="A still from {{ show.series }}">
+          </div>
+          <div class="card-header">
+            <div class="card-title">{{ show.name }}</div>
+            <div class="card-subtitle text-gray">{{ show.series }}</div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
 {% endblock %}

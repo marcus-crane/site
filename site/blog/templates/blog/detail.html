@@ -6,12 +6,12 @@
 {% block blog %}[ blog ]{% endblock %}
 
 {% block content %}
-  <article class="cf ph3 ph6-m ph7-l pv4">
-    <header class="mb2">
-      <h1 class="f2 fw9 mb1 mt0 dib">
-        {{ post.title }} {% if post.sfw %}<p class="f7 ttu dib red mt0 mb0">[nsfw]</p>{% endif %}
-      </h1>
-      <time class="f6 ttu tracked gray db">
+<div class="container col-6 col-9-md col-11-sm pushback">
+  <div class="columns">
+    <div class="column">
+      <h1 {% if not post.sfw %}class="d-inline-block"{% endif %}>{{ post.title }}</h1>
+      {% if not post.sfw %}<sup class="nsfw">nsfw</sup>{% endif %}
+      <time class="d-block">
         {% if post.status == "P" %}
           {{ post.published_at }}
         {% elif post.date != "P" and post.date != None %}
@@ -20,11 +20,12 @@
           {{ post.get_status_display }}
         {% endif %}
       </time>
-    </header>
-    <div class="fn f6 fl-ns" id="content">
-      {{ post.render|safe }}
+      <div class="mt-2">
+        {{ post.render|safe }}
+      </div>
     </div>
-  </article>
+  </div>
+</div>
 {% endblock %}
 
 {% if post.head %}
