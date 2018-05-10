@@ -2,9 +2,15 @@ import datetime
 from django.contrib.auth.models import User
 from django.test import TestCase, RequestFactory
 from django.urls import reverse
-from django.utils import timezone
 
 from .models import Post
+
+def create_post(title, text, date_increment=None, status="P"):
+  if date_increment is None:
+    date = datetime.datetime.now() + datetime.timedelta(days=date_increment)
+  else:
+    date = datetime.datetime.now()
+  return Post.objects.create(title=title, text=text, date=date, status=status)
 
 def create_post(title, text, days, status="P"):
   """
