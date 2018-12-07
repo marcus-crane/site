@@ -1,6 +1,14 @@
-# Things I Made <https://thingsima.de>
+# My original personal site
 
-This is my personal site. There are many like it but this one is mine!
+This is the site that used to live at [https://thingsima.de](https://thingsima.de). It took on a variety of forms, using Django and Flask at various points as I experimented with different technologies.
+
+My current site lives [here](https://github.com/marcus-crane/utf9k) but some ofthe code I used for this site I still find useful so it lives on in archival.
+
+The README below may not longer be accurate but if you dig through the commit history, you can find the results of my efforts like having a stats site that was dynamically updated by a Celery worker in the background every 5 - 10 minutes.
+
+Nowdays, I'm more interested in something with a lower maintenance burden so I'm striving to accomplish the same with a static site. Likely I'll end up with what amounts to a microservice pulling dynamic data that's queried using the fetch Web API. The rest would just be static
+
+---
 
 # Overview
 
